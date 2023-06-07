@@ -1,0 +1,18 @@
+{
+  "@context": [
+    {
+      "cx": "https://w3id.org/catenax/v1.0.0/ns/",
+      "DismantlerCredential": "cx:DismantlerCredential",
+      "Membership": "cx:Membership",
+      "Dismantler": "cx:Dismantler",
+      "Dismantler.activityType": "cx:Dismantler.activityType",
+      "Dismantler.allowedBrands": "cx:Dismantler.allowedBrands",
+      "FrameworkAgreement.pcf": "cx:FrameworkAgreement.pcf",
+      "FrameworkAgreement.sustainability": "cx:FrameworkAgreement.sustainability",
+      "FrameworkAgreement.quality": "cx:FrameworkAgreement.quality",
+      "FrameworkAgreement.resiliency": "cx:FrameworkAgreement.resiliency",
+      "FrameworkAgreement.traceability": "cx:FrameworkAgreement.traceability",
+      "FrameworkAgreement.behavioraltwin": "cx:FrameworkAgreement.behavioraltwin"
+    }
+  ]
+}
