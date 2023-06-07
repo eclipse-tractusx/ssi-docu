@@ -1,6 +1,6 @@
 # 0. Introduction
 
-The document provides a policy definition specification for Catena-X verifiable credentials (VC).
+The document provides a policy specification for Catena-X verifiable credentials (VC).
 
 ### 0.1. Decoupling Policy Definitions from VC Schemas
 
