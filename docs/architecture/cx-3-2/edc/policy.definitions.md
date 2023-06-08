@@ -229,7 +229,7 @@ The Behavior framework agreement is expressed as:
 
 # 4. Policy Example
 
-The following is a `Offer` that requires the data user to be a certified dismantler for `Brand A` vehicles and to have
+The following is an `Offer` that requires the data user to be a certified dismantler for `Brand A` vehicles and to have
 an active signed traceability agreement:
 
 ```json
