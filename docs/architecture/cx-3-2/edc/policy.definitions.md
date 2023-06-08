@@ -31,7 +31,7 @@ The `subtype` and `version` segments are optional.
 #### 0.3.2. The Version Segment
 
 The version segment can optionally be used to specify a credential variant. For example, requiring a specific version of
-a use case agreement could be expressed as:
+a framework agreement could be expressed as:
 
 `FrameworkAgreement.pcf-2.0.0`
 
@@ -53,6 +53,8 @@ follows:
   }
 }
 ```
+
+The `Membership` constraint may only be used as an ODRL `Permission`.
 
 Valid `rightOperand` values are: `active`.
 
@@ -76,6 +78,8 @@ The `Dismantler` root constraint requires a participant to be a certified disman
   }
 }
 ```
+
+The `Dismantler` constraint and its subtypes may only be used as an ODRL `Permission`.
 
 ## 2.2. Dismantler.activityType
 
@@ -120,9 +124,9 @@ follows:
 The `rightOperand` is an array of type `string` containing one or more elements. The elements are evaluated using a
 logical OR.
 
-# 3. Use Case Agreement Constraints
+# 3. Framework Agreement Constraints
 
-Use case agreement constraints adhere to the following syntax:
+Framework agreement constraints adhere to the following syntax:
 
 ```json
 {
@@ -134,10 +138,11 @@ Use case agreement constraints adhere to the following syntax:
 }
 ```
 
-The `type` segment specifies the use case agreement type. The version segment is optional.
+The `type` segment specifies the framework case agreement type. The version segment is optional.
+
+Framework agreement constraints may only be used as an ODRL `Permission`.
 
 > ISSUE: What are the `rightOperand` values?
->
 
 ## 3.1. PCF
 
