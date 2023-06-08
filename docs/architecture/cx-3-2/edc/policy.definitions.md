@@ -234,10 +234,12 @@ an active signed traceability agreement:
 
 ```json
  {
-  "@context": {
-    "cx": "https://w3id.org/catenax/v1.0.0",
-    "@vocab": "http://www.w3.org/ns/odrl.jsonld"
-  },
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "cx": "https://w3id.org/catenax/v1.0.0"
+    }
+  ],
   "@type": "Offer",
   "@id": "a343fcbf-99fc-4ce8-8e9b-148c97605aab",
   "permission": [
