@@ -110,7 +110,8 @@ follows:
     "leftOperand": "Dismantler.allowedBrands",
     "operator": "in",
     "rightOperand": [
-      "Brand A"
+      "Brand A",
+      "Brand B"
     ]
   }
 }
@@ -118,10 +119,6 @@ follows:
 
 The `rightOperand` is an array of type `string` containing one or more elements. The elements are evaluated using a
 logical OR.
-
-## 2.4. Combining Dismantler Constraints
- 
-TODO
 
 # 3. Use Case Agreement Constraints
 
@@ -229,3 +226,40 @@ The Behavior framework agreement is expressed as:
 ## 3.7. BPN
 
 > ISSUE: The Membership VC appears to contain the same information. Is the BPN VC needed?
+
+# 4. Policy Example:
+
+The following is a `Offer` that requires the data user to be a certified dismantler for `Brand A` vehicles and to have
+an active signed traceability agreement:
+
+```json
+ {
+  "@context": {
+    "cx": "https://w3id.org/catenax/v1.0.0",
+    "@vocab": "http://www.w3.org/ns/odrl.jsonld"
+  },
+  "@type": "Offer",
+  "@id": "a343fcbf-99fc-4ce8-8e9b-148c97605aab",
+  "permission": [
+    {
+      "action": "use",
+      "constraint": {
+        "and": [
+          {
+            "leftOperand": "Dismantler.allowedBrands",
+            "operator": "in",
+            "rightOperand": [
+              "Brand A"
+            ]
+          },
+          {
+            "leftOperand": "FrameworkAgreement.traceability",
+            "operator": "eq",
+            "rightOperand": "active"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
