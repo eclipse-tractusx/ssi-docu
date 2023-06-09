@@ -240,9 +240,9 @@ an active signed traceability agreement:
 ```json
  {
   "@context": [
-    "http://www.w3.org/ns/odrl.jsonld",
+    "https://www.w3.org/ns/odrl.jsonld",
     {
-      "cx": "https://w3id.org/tractusx/v0.0.1/ns/"
+      "tx": "https://w3id.org/tractusx/v0.0.1/ns/"
     }
   ],
   "@type": "Offer",
@@ -270,3 +270,4 @@ an active signed traceability agreement:
   ]
 }
 ```
+> Note The Tractus-X context file is not yet publicly available. This will be provided TBD.
