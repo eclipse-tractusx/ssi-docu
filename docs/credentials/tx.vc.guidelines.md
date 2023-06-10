@@ -25,7 +25,7 @@ All TX verifiable credentials must conform to
 the [Verifiable Credentials Data Model v1.1](https://www.w3.org/TR/vc-data-model/).
 
 > Note that the URL scheme adopted by this specification is the one in use by the W3C, which supports the ability to
-version context definitions.
+> version context definitions.
 
 ## 3.1. The Master VC Context
 
@@ -35,7 +35,7 @@ context should be referenced as:
 
 `https://w3id.org/tractusx/2023/credentials/v1.0.0`
 
-## 3.2. Indidual VC Contexts
+## 3.2. Individual VC Contexts
 
 Individual VC contexts define terms specific to the VC and should be referenced using a URL similar to the following:
 
