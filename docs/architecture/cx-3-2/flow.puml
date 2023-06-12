@@ -1,0 +1,23 @@
+@startuml
+participant Consumer as cons
+participant Provider as prov
+participant "Managed Identity Wallet" as miw
+
+autonumber
+
+cons -> miw++: request VP
+return VP
+
+cons -> cons : create and sign JWT
+
+cons -[#blue]>> prov ++: DSP request
+note left: contains JWT with\nSummaryCredential\nas VP in header
+
+prov -> prov: extract JWT (VP) 
+note left: validate JWT before sending
+prov -> miw ++ : validate VP
+return result
+
+return DSP result (4xx or 2xx)
+
+@enduml

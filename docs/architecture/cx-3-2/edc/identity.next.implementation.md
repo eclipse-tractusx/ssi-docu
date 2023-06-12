@@ -105,3 +105,11 @@ VC structure when the `contract.negotiation` and `transfer.process` scopes are e
 interoperability, would be difficult for business analysts to author and read, and is cumbersome to use with Json-Ld
 prefixes (i.e. the JSONPath expressions would have to specify properties in expanded form).   
 
+# Basic message flow
+This diagram shows the proposed message sequence at a coarse level. Please note that this 
+is only scoped for the 3.2 Release of Tractus-X and is subject to change. It uses the [SummaryCredential](../../../credentials/summary/summary.vc.md), which is a temporary solution.
+
+The JWT must be generated according to [this definition](./identity.next.md#51-self-issued-token-format) upon every request. 
+The Provider should validate the token format _before_ contacting the MiW.
+
+![summary_flow](../flow.svg)

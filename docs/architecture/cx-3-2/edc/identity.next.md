@@ -66,7 +66,7 @@ Namely:
 - The `iss` and `sub` claims must be equal and set to the bearer's `web:did`.
 - The `sub_jwk` claim is not used
 - The `aud` set to the BPN of the provider
-- The `client_id` set to the BPN of the client
+- The `client_id` set to the BPN of the consumer
 - The `jti` claim that is used to mitigate against replay attacks
 - The `vp` claim must contain at least one Verifiable Presentation that attests the BPN specified in the `client_id`.
 - All VPs must be in the format specified by
