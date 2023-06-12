@@ -76,28 +76,23 @@
 
 ```json
 {
+    "id": "UUID",
     "@context": [
         "https://www.w3.org/2018/credentials/v1",
         "https://w3id.org/security/suites/jws-2020/v1",
          "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
     ],
-    "id": "http://example.edu/credentials/58473",
-    "issuer": "<did>",
-    "type": ["VerifiableCredential", "DismantlerCredentialCX"],
+    "type": ["VerifiableCredential", "MembershipCredentialCX"],
     "issuanceDate": "2021-06-16T18:56:59Z",
     "expirationDate": "2022-06-16T18:56:59Z",
+    "issuer": "did", //operating environment
     "credentialSubject": {
-        "id": "<did>",
-        "holderIdentifier": "<BPN>",
-        "allowedVehicleBrands": ["Alfa Romeo", "Alpina", "BMW"] 
-    },        
-    "proof": {
-      "type": "JsonWebSignature2020",
-      "created": "2019-12-11T03:50:55Z",
-      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..MJ5GwWRMsadCyLNXU_flgJtsS32584MydBxBuygps_cM0sbU3abTEOMyUvmLNcKOwOBE1MfDoB1_YY425W3sAg",
-      "proofPurpose": "assertionMethod",
-      "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"
-    } 
+        "type":"MembershipCredential",
+        "holderIdentifier": "bpn",
+        "memberOf":"Catena-X",
+        "status":"Active",
+        "startTime":"2021-06-16T18:56:59Z"
+    }
 }
 ```
 # Dismantler Credential
