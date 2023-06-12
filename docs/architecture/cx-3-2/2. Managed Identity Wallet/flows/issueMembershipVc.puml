@@ -1,0 +1,34 @@
+@startuml
+title Issue Membership Credential
+
+actor User as User
+
+participant PortalIDP as keycloak
+participant ManagedIdentityWallet as MIW
+
+box "Get Accesstoken"
+  User -> keycloak: Get AccessToken
+  keycloak --> User: AccessToken
+end box
+
+group "Issue Membership"
+    User -> MIW: "/api/credentials/issuer/membership" with BPN
+    group "Create Membership Credential" 
+        MIW -> MIW: Create Use Case Credential
+        MIW -> MIW: Sign JSON-LD Use Case Credential with issuer private key (Private Key of Issuer Wallet)
+        MIW -> MIW: Store Credential in Issuer Wallet
+        MIW -> MIW: Store Credential in Holder Wallet
+    end group
+    group "Summary Credential" 
+        MIW -> MIW: Access User Wallet
+        MIW -> MIW: Check if Summary Credential is already Created
+        MIW -> MIW: Check Membership Credential is not already in Summary Credential
+        MIW -> MIW: Delete Summary Credential in User Wallet
+        MIW -> MIW: Create Summary Credential with specific Use Case
+        MIW -> MIW: Store Summary Credential in Issuer Wallet
+        MIW -> MIW: Store Summary Credential in Holder Wallet
+    end group
+    MIW --> User: Return signed Membership Credential
+end group
+
+@enduml

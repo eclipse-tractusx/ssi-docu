@@ -1,0 +1,27 @@
+@startuml
+title Fetch SummaryVP
+
+actor User as User
+
+participant PortalIDP as keycloak
+participant ManagedIdentityWallet as MIW
+
+box "Get Accesstoken"
+  User -> keycloak: Get AccessToken
+  keycloak --> User: AccessToken
+end box
+
+group "Get Summary VP"
+    group "Get Summary Credential" 
+        User -> MIW: "/api/credentials?type=['SummaryCredential']"
+        MIW -> MIW: Lookup Credential in Wallet with Type
+        MIW --> User: Return Credential(s) with Type
+    end group
+    group "Create Summary Presentation" 
+        User -> MIW: "/api/presentations?withAudience=['Audience1','Audience2']+asJwt=true"
+        MIW -> MIW: Issue VP with Audience as JWT
+        MIW --> User: Return signed Presentation
+    end group
+end group
+
+@enduml
