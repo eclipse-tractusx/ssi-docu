@@ -21,17 +21,16 @@ The following is an example Summary VC:
   "credentialSubject": {
     "id": "<did:web:subject>",
     "holderIdentifier": "<BPN>",
-    "type": "Summary-List",
-    "name": "CX-Credentials",
+    "type": "SummaryCredential",
     "items": [
-      "cx-active-member",
-      "cx-dismantler",
-      "cx-pcf",
-      "cx-sustainability",
-      "cx-quality",
-      "cx-traceability",
-      "cx-behavior-twin",
-      "cx-bpn"
+      "MembershipCredential",
+      "DismantlerCredential",
+      "PcfCredential",
+      "SustainabilityCredential",
+      "QualityCredential",
+      "TraceabilityCredential",
+      "BehaviorTwinCredential",
+      "BpnCredential"
     ],
     "contract-templates": "https://public.catena-x.org/contracts/"
   }
@@ -94,7 +93,7 @@ that would require term definitions in the VC context.
 
 The proposed valid property values are:
 
-- MembershipCredential
+- MembershipCredentialCX
 - DismantlerCredential
 - PcfCredential
 - SustainabilityCredential

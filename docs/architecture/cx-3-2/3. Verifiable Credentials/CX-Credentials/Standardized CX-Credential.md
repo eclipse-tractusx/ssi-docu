@@ -1,6 +1,8 @@
 
 # BPN Credential 
 ```json
+
+ADD LINK TO proof
 {
     "id": "UUID",
     "@context": [
@@ -8,13 +10,16 @@
         "https://w3id.org/security/suites/jws-2020/v1",
         "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
     ],
-    "type": ["VerifiableCredential", "BpnCredentialCX"],
+    "type": ["VerifiableCredential", "BpnCredential"],
     "issuer": "<did>",
     "issuanceDate": "2021-06-16T18:56:59Z",
     "credentialSubject": {
+        "id":"<did>",
         "type":"BpnCredential",
         "bpn":"bpn"
     }
+
+   
 }
 ```
 # Membership Credential 
@@ -27,17 +32,20 @@
         "https://w3id.org/security/suites/jws-2020/v1",
          "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
     ],
-    "type": ["VerifiableCredential", "MembershipCredentialCX"],
+    "type": ["VerifiableCredential", "MembershipCredential",],
     "issuanceDate": "2021-06-16T18:56:59Z",
     "expirationDate": "2022-06-16T18:56:59Z",
-    "issuer": "did", //operating environment
+    "issuer": "did", 
     "credentialSubject": {
+        "id": "<did>",
         "type":"MembershipCredential",
         "holderIdentifier": "bpn",
         "memberOf":"Catena-X",
         "status":"Active",
         "startTime":"2021-06-16T18:56:59Z"
     }
+
+ 
 }
 ```
 # Dismantler Credential
@@ -46,25 +54,22 @@
     "@context": [
         "https://www.w3.org/2018/credentials/v1",
         "https://w3id.org/security/suites/jws-2020/v1",
-         "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
+        "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
     ],
-    "id": "http://example.edu/credentials/58473",
+    "id": "UUID",
     "issuer": "<did>",
-    "type": ["VerifiableCredential", "DismantlerCredentialCX"],
+    "type": ["VerifiableCredential", "DismantlerCredential"],
     "issuanceDate": "2021-06-16T18:56:59Z",
     "expirationDate": "2022-06-16T18:56:59Z",
     "credentialSubject": {
         "id": "<did>",
+        "type": "DismantlerCredential", 
         "holderIdentifier": "<BPN>",
         "allowedVehicleBrands": ["Alfa Romeo", "Alpina", "BMW"] 
-    },        
-    "proof": {
-      "type": "JsonWebSignature2020",
-      "created": "2019-12-11T03:50:55Z",
-      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..MJ5GwWRMsadCyLNXU_flgJtsS32584MydBxBuygps_cM0sbU3abTEOMyUvmLNcKOwOBE1MfDoB1_YY425W3sAg",
-      "proofPurpose": "assertionMethod",
-      "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"
-    } 
+    }
+ 
+ 
+
 }
 ```
 # Behavior Twin Use Case Credential
@@ -75,33 +80,26 @@
         "https://w3id.org/security/suites/jws-2020/v1",
         "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/UseCaseVC"
     ],
-    "id": "https://public.catena-x.org/contracts/behavior_twin.v1.pdf",
+    "id": "UUID",
     "issuer": "<did of OpCo>",
     "type": ["VerifiableCredential", "UseCaseFrameworkConditionCX"],
     "issuanceDate": "somedate",
-    "expirationDate": "somedate", //Optional Field
+    "expirationDate": "somedate",
     "credentialSubject": {
         "id": "<did>",
-        "holderIdentifier": "BPN",
-        "usecase-agreement": {
-            "value": "Behavior Twin",
-            "type": "cx-behavior-twin",
-            "contract-template": "https://public.catena-x.org/contracts/behavior_twin.v1.pdf",
-            "contract-version": "1.0.0"
-        }   
-    },    
-    "proof": {
-      "type": "JsonWebSignature2020",
-      "created": "2019-12-11T03:50:55Z",
-      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..MJ5GwWRMsadCyLNXU_flgJtsS32584MydBxBuygps_cM0sbU3abTEOMyUvmLNcKOwOBE1MfDoB1_YY425W3sAg",
-      "proofPurpose": "assertionMethod",
-      "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"
-    } 
+        "holderIdentifier": "BPN",   
+        "type": "BehaviorTwinCredential",
+        "contract-template": "https://public.catena-x.org/contracts/behavior_twin.v1.pdf",
+        "contract-version": "1.0.0"
+        
+    }   
+  
 }
 ```
 # PCF Use Case Credential
 
 ```json
+
 {
     "@context": [
         "https://www.w3.org/2018/credentials/v1",
@@ -112,24 +110,15 @@
     "issuer": "<issuerDID>",
     "type": ["VerifiableCredential", "UseCaseFrameworkConditionCX"],
     "issuanceDate": "2021-06-16T18:56:59Z",
-    "expirationDate": "2022-06-16T18:56:59Z", //Optional field
+    "expirationDate": "2022-06-16T18:56:59Z",
     "credentialSubject": {
         "id": "<did>",
-        "holderIdentifier": "<BPN>"
-        "usecaseAgreement": {
-            "value": "PCF",
-            "type": "cx-pcf",
-            "contract-template": "https://public.catena-x.org/contracts/pcf.v1.pdf",
-            "contract-version": "1.0.0",  
-        }
-    },    
-    "proof": {
-      "type": "JsonWebSignature2020",
-      "created": "2019-12-11T03:50:55Z",
-      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..MJ5GwWRMsadCyLNXU_flgJtsS32584MydBxBuygps_cM0sbU3abTEOMyUvmLNcKOwOBE1MfDoB1_YY425W3sAg",
-      "proofPurpose": "assertionMethod",
-      "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"
-    } 
+        "holderIdentifier": "<BPN>",
+        "type": "PcfCredential",
+        "contract-template": "https://public.catena-x.org/contracts/pcf.v1.pdf",
+        "contract-version": "1.0.0",  
+        
+    }
 }
 ```
 # Sustainablity Use Case Credential
@@ -149,20 +138,12 @@
     "credentialSubject": {
         "id": "<did>",
         "holderIdentifier": "BPN of holder", 
-        "usecase-agreement": {
-            "value": "Quality",
-            "type": "cx-quality",
-            "contract-template": "https://public.catena-x.org/contracts/quality.v1.pdf",
-            "contract-version": "1.0.0"   
-        }
-    },    
-    "proof": {
-      "type": "JsonWebSignature2020",
-      "created": "2019-12-11T03:50:55Z",
-      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..MJ5GwWRMsadCyLNXU_flgJtsS32584MydBxBuygps_cM0sbU3abTEOMyUvmLNcKOwOBE1MfDoB1_YY425W3sAg",
-      "proofPurpose": "assertionMethod",
-      "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"
-    } 
+        "type": "SustainabilityCredential",
+        "contract-template": "https://public.catena-x.org/contracts/sustainability.v1.pdf",
+        "contract-version": "1.0.0"   
+        
+    }
+
 }
 ```
 # Quality Use Case Credential 
@@ -182,20 +163,11 @@
     "credentialSubject": {
         "id": "<did>",
         "holderIdentifier": "BPN of holder", 
-        "usecase-agreement": {
-            "value": "Quality",
-            "type": "cx-quality",
-            "contract-template": "https://public.catena-x.org/contracts/quality.v1.pdf",
-            "contract-version": "1.0.0"   
-        }
-    },    
-    "proof": {
-      "type": "JsonWebSignature2020",
-      "created": "2019-12-11T03:50:55Z",
-      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..MJ5GwWRMsadCyLNXU_flgJtsS32584MydBxBuygps_cM0sbU3abTEOMyUvmLNcKOwOBE1MfDoB1_YY425W3sAg",
-      "proofPurpose": "assertionMethod",
-      "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"
-    } 
+        "type": "QualityCredential",
+        "contract-template": "https://public.catena-x.org/contracts/quality.v1.pdf",
+        "contract-version": "1.0.0"   
+        
+    }
 }
 ```
 # Resiliency Use Case Credential 
@@ -215,19 +187,9 @@
     "credentialSubject": {
         "id": "<did>",
         "holderIdentifier": "BPN of holder",
-        "usecase-agreement": {
-            "value": "Resiliency",
-            "type": "cx-resiliency",
-            "contract-template": "https://public.catena-x.org/contracts/resiliency.v1.pdf",
-            "contract-version": "1.0.0"  
-        }
-    },    
-    "proof": {
-      "type": "JsonWebSignature2020",
-      "created": "2019-12-11T03:50:55Z",
-      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..MJ5GwWRMsadCyLNXU_flgJtsS32584MydBxBuygps_cM0sbU3abTEOMyUvmLNcKOwOBE1MfDoB1_YY425W3sAg",
-      "proofPurpose": "assertionMethod",
-      "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"
+        "type": "ResiliencyCredential",
+        "contract-template": "https://public.catena-x.org/contracts/resiliency.v1.pdf",
+        "contract-version": "1.0.0"  
     } 
 }
 ```
@@ -244,23 +206,13 @@
     "issuer": "<issuerDID>",
     "type": ["VerifiableCredential", "UseCaseFrameworkConditionCX"],
     "issuanceDate": "2021-06-16T18:56:59Z",
-    "expirationDate": "2022-06-16T18:56:59Z", //Optional field
+    "expirationDate": "2022-06-16T18:56:59Z", 
     "credentialSubject": {
         "id": "<did>",
-        "holderIdentifier": "<BPN>", 
-        "usecaseAgreement": {
-            "value": "ID_3.0_Trace",
-            "type": "cx-traceability",
-            "contract-template": "https://public.catena-x.org/contracts/traceabilty.v1.pdf",
-            "contract-version": "1.0.0",   
-        }
-    },    
-    "proof": {
-      "type": "JsonWebSignature2020",
-      "created": "2019-12-11T03:50:55Z",
-      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..MJ5GwWRMsadCyLNXU_flgJtsS32584MydBxBuygps_cM0sbU3abTEOMyUvmLNcKOwOBE1MfDoB1_YY425W3sAg",
-      "proofPurpose": "assertionMethod",
-      "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"
-    } 
+        "holderIdentifier": "<BPN>",
+        "type": "TraceabilityCredential",
+        "contract-template": "https://public.catena-x.org/contracts/traceabilty.v1.pdf",
+        "contract-version": "1.0.0",   
+    }
 }
 ```

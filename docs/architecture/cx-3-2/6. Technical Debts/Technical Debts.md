@@ -25,6 +25,7 @@
 ## Verifiable credential
 
 * CX-Credentials are not consistent
+* Only Summary Credential will be used because of the http header limition of 8KB
 
 ## SSI Lib
   
@@ -34,4 +35,4 @@
   * ...
 
 ## EDC 
- .... HHTP header limition of 8KB 
+ 
