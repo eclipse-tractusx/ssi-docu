@@ -242,7 +242,7 @@ an active signed traceability agreement:
   "@context": [
     "https://www.w3.org/ns/odrl.jsonld",
     {
-      "tx": "https://w3id.org/tractusx/v0.0.1/ns/"
+      "cx": "https://w3id.org/catenax/v0.0.1/ns/"
     }
   ],
   "@type": "Offer",
