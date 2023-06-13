@@ -5,7 +5,9 @@ participant "Managed Identity Wallet" as miw
 
 autonumber
 
-cons -> miw++: request VP
+cons -> miw++: request VC
+return VC
+cons -> miw++: send VC, generate VP
 return VP
 
 cons -> cons : create and sign JWT
