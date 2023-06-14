@@ -22,14 +22,14 @@ The following is an example Summary VC:
     "id": "<did:web:subject>",
     "holderIdentifier": "<BPN>",
     "items": [
-      "cx-active-member",
-      "cx-dismantler",
-      "cx-pcf",
-      "cx-sustainability",
-      "cx-quality",
-      "cx-traceability",
-      "cx-behavior-twin",
-      "cx-bpn"
+      "MembershipCredential",
+      "DismantlerCredential",
+      "PcfCredential",
+      "SustainabilityCredential",
+      "QualityCredential",
+      "TraceabilityCredential",
+      "BehaviorTwinCredential",
+      "BpnCredential"
     ],
     "contract-templates": "https://public.catena-x.org/contracts/"
   }
@@ -55,14 +55,14 @@ set of string identifiers indicating the credential types held by the subject.
 
 Valid items are:
 
-- cx-active-member
-- cx-dismantler
-- cx-pcf
-- cx-sustainability
-- cx-quality
-- cx-traceability
-- cx-behavior-twin
-- cx-bpn
+- MembershipCredential
+- DismantlerCredential
+- PcfCredential
+- SustainabilityCredential
+- QualityCredential
+- TraceabilityCredential
+- BehaviorTwinCredential
+- BpnCredential
 
 ## 2.3 Mandatory Properties
 
@@ -81,24 +81,7 @@ credential if it is decided not to retire that VC. Note that these issues will n
 - The `credentialSubject#contract-template` property uses hyphens and should be consistent with W3C camelCase
 - The `credentialSubject#items-template` property uses hyphens and should be consistent with W3C camelCase
 
-## 3.2 Referencing Credential Types
-
-Credentials referenced in the [Summary Items property](#22-summary-items) should correspond to credential types, not
-hyphenated strings, e.g.`DismantlerCredential` instead of `cx-dismantler`. Note that actual types will not be used as
-that would require term definitions in the VC context.
-
-The proposed valid property values are:
-
-- MembershipCredential
-- DismantlerCredential
-- PcfCredential
-- SustainabilityCredential
-- QualityCredential
-- TraceabilityCredential
-- BehaviorTwinCredential
-- BpnCredential
-
-## 3.3 Use of IRIs
+## 3.2 Use of IRIs
 
 The `credentialSubject#contract-template` property should be an IRI instead of text. There it should be defined as
 type `@id`:
