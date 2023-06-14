@@ -30,6 +30,4 @@ MIW-> MIW: Create Membershipcredential(BPN, did)
 MIW-> MIW: sign jsonLD Membership Credential with issuer private key (authrotity Private Key from Portal)
 MIW-> MIW: Create new Database entry for VC/BPN/Tenant 
 
-
-
 @enduml

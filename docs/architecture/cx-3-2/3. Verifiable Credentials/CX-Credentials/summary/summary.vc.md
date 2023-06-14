@@ -32,7 +32,7 @@ The following is an example Summary VC:
       "BehaviorTwinCredential",
       "BpnCredential"
     ],
-    "contract-templates": "https://public.catena-x.org/contracts/"
+    "contracTemplates": "https://public.catena-x.org/contracts/"
   }
 }
 ```

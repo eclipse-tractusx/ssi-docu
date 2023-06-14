@@ -67,11 +67,9 @@ ADD LINK TO proof
         "holderIdentifier": "<BPN>",
         "allowedVehicleBrands": ["Alfa Romeo", "Alpina", "BMW"] 
     }
- 
- 
-
 }
 ```
+
 # Behavior Twin Use Case Credential
 ```json
 {
@@ -82,18 +80,16 @@ ADD LINK TO proof
     ],
     "id": "UUID",
     "issuer": "<did of OpCo>",
-    "type": ["VerifiableCredential", "UseCaseFrameworkConditionCX"],
+    "type": ["VerifiableCredential", "UseCaseFrameworkCondition"],
     "issuanceDate": "somedate",
     "expirationDate": "somedate",
     "credentialSubject": {
         "id": "<did>",
         "holderIdentifier": "BPN",   
         "type": "BehaviorTwinCredential",
-        "contract-template": "https://public.catena-x.org/contracts/behavior_twin.v1.pdf",
-        "contract-version": "1.0.0"
-        
+        "contractTemplate": "https://public.catena-x.org/contracts/behavior_twin.v1.pdf",
+        "contractVersion": "1.0.0"
     }   
-  
 }
 ```
 # PCF Use Case Credential
@@ -108,16 +104,15 @@ ADD LINK TO proof
     ],
     "id": "UUID",
     "issuer": "<issuerDID>",
-    "type": ["VerifiableCredential", "UseCaseFrameworkConditionCX"],
+    "type": ["VerifiableCredential", "UseCaseFrameworkCondition"],
     "issuanceDate": "2021-06-16T18:56:59Z",
     "expirationDate": "2022-06-16T18:56:59Z",
     "credentialSubject": {
         "id": "<did>",
         "holderIdentifier": "<BPN>",
         "type": "PcfCredential",
-        "contract-template": "https://public.catena-x.org/contracts/pcf.v1.pdf",
-        "contract-version": "1.0.0",  
-        
+        "contractTemplate": "https://public.catena-x.org/contracts/pcf.v1.pdf",
+        "contractVersion": "1.0.0"
     }
 }
 ```
@@ -132,15 +127,15 @@ ADD LINK TO proof
     ],    
     "id": "UUID",
     "issuer": "<issuerDID>",
-    "type": ["VerifiableCredential", "UseCaseFrameworkConditionCX"],    
+    "type": ["VerifiableCredential", "UseCaseFrameworkCondition"],    
     "issuanceDate": "2021-06-16T18:56:59Z",
     "expirationDate": "2022-06-16T18:56:59Z",    
     "credentialSubject": {
         "id": "<did>",
         "holderIdentifier": "BPN of holder", 
         "type": "SustainabilityCredential",
-        "contract-template": "https://public.catena-x.org/contracts/sustainability.v1.pdf",
-        "contract-version": "1.0.0"   
+        "contractTemplate": "https://public.catena-x.org/contracts/sustainability.v1.pdf",
+        "contractVersion": "1.0.0"   
         
     }
 
@@ -157,15 +152,15 @@ ADD LINK TO proof
     ],    
     "id": "UUID",
     "issuer": "<issuerDID>",
-    "type": ["VerifiableCredential", "UseCaseFrameworkConditionCX"],    
+    "type": ["VerifiableCredential", "UseCaseFrameworkCondition"],    
     "issuanceDate": "2021-06-16T18:56:59Z",
     "expirationDate": "2022-06-16T18:56:59Z",    
     "credentialSubject": {
         "id": "<did>",
         "holderIdentifier": "BPN of holder", 
         "type": "QualityCredential",
-        "contract-template": "https://public.catena-x.org/contracts/quality.v1.pdf",
-        "contract-version": "1.0.0"   
+        "contractTemplate": "https://public.catena-x.org/contracts/quality.v1.pdf",
+        "contractVersion": "1.0.0"   
         
     }
 }
@@ -181,15 +176,15 @@ ADD LINK TO proof
     ],   
     "id": "UUID",
     "issuer": "<issuerDID>",
-    "type": ["VerifiableCredential", "UseCaseFrameworkConditionCX"],   
+    "type": ["VerifiableCredential", "UseCaseFrameworkCondition"],   
     "issuanceDate": "2021-06-16T18:56:59Z",
     "expirationDate": "2022-06-16T18:56:59Z",   
     "credentialSubject": {
         "id": "<did>",
         "holderIdentifier": "BPN of holder",
         "type": "ResiliencyCredential",
-        "contract-template": "https://public.catena-x.org/contracts/resiliency.v1.pdf",
-        "contract-version": "1.0.0"  
+        "contractTemplate": "https://public.catena-x.org/contracts/resiliency.v1.pdf",
+        "contractVersion": "1.0.0"  
     } 
 }
 ```
@@ -204,15 +199,15 @@ ADD LINK TO proof
     ],
     "id": "UUID",
     "issuer": "<issuerDID>",
-    "type": ["VerifiableCredential", "UseCaseFrameworkConditionCX"],
+    "type": ["VerifiableCredential", "UseCaseFrameworkCondition"],
     "issuanceDate": "2021-06-16T18:56:59Z",
     "expirationDate": "2022-06-16T18:56:59Z", 
     "credentialSubject": {
         "id": "<did>",
         "holderIdentifier": "<BPN>",
         "type": "TraceabilityCredential",
-        "contract-template": "https://public.catena-x.org/contracts/traceabilty.v1.pdf",
-        "contract-version": "1.0.0",   
+        "contractTemplate": "https://public.catena-x.org/contracts/traceabilty.v1.pdf",
+        "contractVersion": "1.0.0",   
     }
 }
 ```
