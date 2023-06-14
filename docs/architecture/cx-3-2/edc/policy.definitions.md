@@ -24,20 +24,24 @@ Usage requirements involving VCs are expressed as **_ODRL Policy Constraints_**.
 Catena-X will use the left operand of a _constraint_ to associate a specific VC. The left operand value will correspond
 to the form:
 
-`[VC type].[subtype]-[version]`
+`[VC type].[subtype]
 
-The `subtype` and `version` segments are optional.
+The `subtype` segment is optional.
 
-#### 0.3.2. The Version Segment
+### 0.2.2. The Right Operand
+
+To indicate the need for an active (valid) credential the string value 'active' will be used. The value may contain an
+optional version postfix separated by `:`
+
+`active:[version]`
 
 The version segment can optionally be used to specify a credential variant. For example, requiring a specific version of
-a framework agreement could be expressed as:
+a credential could be expressed as:
 
-`FrameworkAgreement.pcf-2.0.0`
+`active:2.0.0`
 
-If the version is omitted, the latest credential version:
-
-`FrameworkAgreement.pcf`
+The version should followg [semantic versioning](https://semver.org/) If the version is omitted, the latest credential
+version will be used.
 
 # 1. Membership Constraint
 
@@ -131,14 +135,14 @@ Framework agreement constraints adhere to the following syntax:
 ```json
 {
   "constraint": {
-    "leftOperand": "FrameworkAgreement.[type]-[version]",
+    "leftOperand": "FrameworkAgreement.[type]",
     "operator": "eq",
-    "rightOperand": "active"
+    "rightOperand": "active:[version]"
   }
 }
 ```
 
-The `type` segment specifies the framework case agreement type. The version segment is optional.
+The `type` segment specifies the framework case agreement type. The version postfix in the right operand is optional.
 
 Framework agreement constraints may only be used as an ODRL `Permission`.
 
@@ -151,9 +155,9 @@ The PCF framework agreement is expressed as:
 ```json
 {
   "constraint": {
-    "leftOperand": "FrameworkAgreement.pcf-[version]",
+    "leftOperand": "FrameworkAgreement.pcf",
     "operator": "eq",
-    "rightOperand": "active"
+    "rightOperand": "active:[version]"
   }
 }
 ```
@@ -165,9 +169,9 @@ The Sustainability framework agreement is expressed as:
 ```json
 {
   "constraint": {
-    "leftOperand": "FrameworkAgreement.sustainability-[version]",
+    "leftOperand": "FrameworkAgreement.sustainability",
     "operator": "eq",
-    "rightOperand": "active"
+    "rightOperand": "active:[version]"
   }
 }
 ```
@@ -179,9 +183,9 @@ The Quality framework agreement is expressed as:
 ```json
 {
   "constraint": {
-    "leftOperand": "FrameworkAgreement.quality-[version]",
+    "leftOperand": "FrameworkAgreement.quality",
     "operator": "eq",
-    "rightOperand": "active"
+    "rightOperand": "active:[version]"
   }
 }
 ```
@@ -193,9 +197,9 @@ The Resiliency framework agreement is expressed as:
 ```json
 {
   "constraint": {
-    "leftOperand": "FrameworkAgreement.resiliency-[version]",
+    "leftOperand": "FrameworkAgreement.resiliency",
     "operator": "eq",
-    "rightOperand": "active"
+    "rightOperand": "active:[version]"
   }
 }
 ```
@@ -207,9 +211,9 @@ The Traceability framework agreement is expressed as:
 ```json
 {
   "constraint": {
-    "leftOperand": "FrameworkAgreement.traceability-[version]",
+    "leftOperand": "FrameworkAgreement.traceability",
     "operator": "eq",
-    "rightOperand": "active"
+    "rightOperand": "active:[version]"
   }
 }
 ```
@@ -221,9 +225,9 @@ The Behavior framework agreement is expressed as:
 ```json
 {
   "constraint": {
-    "leftOperand": "FrameworkAgreement.behavioraltwin-[version]",
+    "leftOperand": "FrameworkAgreement.behavioraltwin",
     "operator": "eq",
-    "rightOperand": "active"
+    "rightOperand": "active:[version]"
   }
 }
 ```
@@ -270,4 +274,5 @@ an active signed traceability agreement:
   ]
 }
 ```
+
 > Note The Tractus-X context file is not yet publicly available. This will be provided TBD.
