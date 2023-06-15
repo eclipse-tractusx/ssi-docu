@@ -14,15 +14,11 @@
     "holderIdentifier": {
       "@id": "summary:holderIdentifier"
     },
-    "name": {
-      "@id": "summary:name",
-      "@type": "https://schema.org/Text"
-    },
     "items": {
       "@id": "summary:items",
       "@type": "https://schema.org/Text"
     },
-    "contract-template": {
+    "contractTemplate": {
       "@id": "summary:contract-template",
       "@type": "https://schema.org/Text"
     }

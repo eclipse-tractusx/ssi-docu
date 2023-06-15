@@ -1,8 +1,30 @@
 # Managed Identity Wallet
 
+To align the identity, authentication and data exchange of participants with the open and decentralized concepts within GAIA-X, especially self-sovereign identities, every legal entity associated to a BPNL number should have the possibility to also get a W3C compliant DID (Decentralized Identifier). Due to the lack of production-ready SSI infrastructure and slow adoption on the market, this is in a first step achieved by providing a managed wallet (also called "Custodian") with a private/public key pair and related DID for a legal entity along with the onboarding. This wallet can then be used via the Managed Identity Wallet API by other services or applications such as the Self Description or the EDC to issue and retrieve verifiable credentials and create verifiable presentations on behalf of a certain legal entity as part of governance processes and use cases. 
+
 # EDC used Endpoints
 
+## Get Credential
+
+For Fetching an Credential the EDC can use the credentialendpoint
+and define the Credential Type he wants to have. The Summary Credential 
+can only be one time in a User Wallet.
+
+"/api/credentials?type=['SummaryCredential']"
+
+## Create Presentation
+
+"/api/presentations?withAudience=['Audience1','Audience2']+asJwt=true"
+
+## Validate Presentation
+
+The Enpoint is called with the presentation in the body
+
+"/api/presentations/validation?withDateValidation=true"
+
 # Single Instance View 
+
+![MIW Single Instance View](images/SingleInstanceDomainView.png)
 
 # Summary VC
 
@@ -44,7 +66,6 @@ Here is an example of a Summary VC in JSON-LD format:
   }
 }
 ```
-
 
 ## Summary VC Schema Specification
 The Summary VC schema is based on the JSON-LD format and consists of the following properties:

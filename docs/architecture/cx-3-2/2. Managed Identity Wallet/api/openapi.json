@@ -384,7 +384,7 @@
                                             "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
                                         ],
                                         "issuer": "<did>",
-                                        "type": ["VerifiableCredential", "DismantlerCredentialCX"],
+                                        "type": ["VerifiableCredential", "DismantlerCredential"],
                                         "issuanceDate": "2021-06-16T18:56:59Z",
                                         "expirationDate": "2022-06-16T18:56:59Z",
                                         "credentialSubject": {
@@ -666,13 +666,13 @@
                         "deprecated": false,
                         "examples": {
                           "membershipCredential": {
-                            "value": ["MembershipCredentialCX"]
+                            "value": ["MembershipCredential"]
                           },
                           "bpnCredential": {
-                            "value": ["BpnCredentialCX"]
+                            "value": ["BpnCredential"]
                           },
                           "summaryCredential": {
-                            "value": ["SummaryCredentialCX"]
+                            "value": ["SummaryCredential"]
                           }
                         }
                       }
@@ -751,10 +751,11 @@
                                             "https://www.w3.org/2018/credentials/v1",
                                             "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
                                         ],
-                                        "type": ["VerifiableCredential", "DismantlerCredentialCX"],
+                                        "type": ["VerifiableCredential", "DismantlerCredential"],
                                         "expirationDate": "2022-06-16T18:56:59Z",
                                         "credentialSubject": {
                                             "id": "<did>",
+                                            "type": "DismantlerCredential",
                                             "holderIdentifier": "<BPN>",
                                             "allowedVehicleBrands": ["Alfa Romeo", "Alpina", "BMW"]    
                                         }
@@ -766,10 +767,11 @@
                                             "https://www.w3.org/2018/credentials/v1",
                                             "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
                                         ],
-                                        "type": ["VerifiableCredential", "DismantlerCredentialCX"],
+                                        "type": ["VerifiableCredential", "DismantlerCredential"],
                                         "expirationDate": "2022-06-16T18:56:59Z",
                                         "credentialSubject": {
                                             "id": "<did>",
+                                            "type": "DismantlerCredential",
                                             "holderIdentifier": "<BPN>",
                                             "allowedVehicleBrands": ["Alfa Romeo", "Alpina", "BMW"]    
                                         }
@@ -1413,19 +1415,9 @@
                                 "Tracability": {
                                     "value": {
                                         "bpn": "bpn",
-                                        "value": "ID_3.0_Trace",
-                                        "type": "cx-traceability",
-                                        "contract-template": "https://public.catena-x.org/contracts/traceabilty.v1.pdf",
-                                        "contract-version": "1.0.0"
-                                    }
-                                },
-                                "Framework Agreement": {
-                                    "value": {
-                                        "bpn": "bpn",
-                                        "value": "ID_3.0_Trace",
-                                        "type": "cx-traceability",
-                                        "contract-template": "https://public.catena-x.org/contracts/traceabilty.v1.pdf",
-                                        "contract-version": "1.0.0"
+                                        "type": "TraceabilityCredential",
+                                        "contractTemplate": "https://public.catena-x.org/contracts/traceabilty.v1.pdf",
+                                        "contractVersion": "1.0.0"
                                     }
                                 }
                             }
@@ -1457,10 +1449,9 @@
                                                  "id": "<did>",
                                                  "holderIdentifier": "BPN",
                                                 "usecase-agreement": {
-                                                    "value": "Behavior Twin",
-                                                    "type": "cx-behavior-twin",
-                                                    "contract-template": "https://public.catena-x.org/contracts/behavior_twin.v1.pdf",
-                                                    "contract-version": "1.0.0"
+                                                    "type": "BehaviorTwinCredential",
+                                                    "contractTemplate": "https://public.catena-x.org/contracts/behavior_twin.v1.pdf",
+                                                    "contractVersion": "1.0.0"
                                                 }   
                                             },
                                             "proof": {
@@ -1488,8 +1479,7 @@
                                             "credentialSubject": {
                                                   "id": "<did>",
                                                 "usecase-agreement": {
-                                                    "value": "ID_3.0_Trace",
-                                                    "type": "cx-traceability",
+                                                    "type": "TraceabilityCredential",
                                                     "contract-template": "https://public.catena-x.org/contracts/traceabilty.v1.pdf",
                                                     "contract-version": "1.0.0"
                                                 }
@@ -1519,8 +1509,7 @@
                                             "credentialSubject": {
                                                   "id": "<did>",
                                                 "usecase-agreement": {
-                                                    "value": "Quality",
-                                                    "type": "cx-quality",
+                                                    "type": "QualityCredential",
                                                     "contract-template": "https://public.catena-x.org/contracts/quality.v1.pdf",
                                                     "contract-version": "1.0.0"    
                                                 }

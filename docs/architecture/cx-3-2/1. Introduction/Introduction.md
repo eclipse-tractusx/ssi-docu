@@ -5,24 +5,18 @@ Cooming soon
 # Architecture Overview
 Cooming
 ## Component View
-
-
 ![](/docs/architecture/cx-3-2/src/Images/Minimal_Picture.png)
 
 ## Sequence View
 
 ### Wallet Creation 
-
-![](../src/Images/Wallet_Creation.png)
-[Link to pumlfile](/docs/architecture/cx-3-2/src/Diagrams/Wallet%20Creation.wsd)
-
+![Link to pumlfile](../2.%20Managed%20Identity%20Wallet/flows/createWallet.puml)
 
 ### Credential Issuence 
+![Link to pumlfile](../2.%20Managed%20Identity%20Wallet/flows/issueMembershipVc.puml)
 
-### Credential Validation
-
-### 
-
+### Presentation Validation
+![Link to pumlfile](../2.%20Managed%20Identity%20Wallet/flows/validateVp.puml)
 
 # Notes
 

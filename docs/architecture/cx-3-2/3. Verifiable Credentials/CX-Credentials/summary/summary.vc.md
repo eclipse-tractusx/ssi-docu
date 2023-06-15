@@ -56,43 +56,6 @@ set of string identifiers indicating the credential types held by the subject.
 
 Valid items are:
 
-- cx-active-member
-- cx-dismantler
-- cx-pcf
-- cx-sustainability
-- cx-quality
-- cx-traceability
-- cx-behavior-twin
-- cx-bpn
-
-## 2.3 Mandatory Properties
-
-If mandatory properties are not present, the VC should be interpreted as invalid.
-
-# 3. Issues
-
-The following are outstanding questions and issues that need to be resolved. There is
-a [proposed context](./summary.vc.context.modified.v1.json) that resolves these issues.
-
-## 3.1. Clear Properties
-
-- What are `credentialSubject#type` and `credentialSubject#name` used for?
-
-## 3.2 Consistent Naming
-
-- The `credentialSubject#items` property is too ambiguous and should be something
-  like `credentialSubject#hasCredentials`
-- The `credentialSubject#contract-template` property uses hyphens and should be consistent with W3C camelCase
-- The `credentialSubject#items-template` property uses hyphens and should be consistent with W3C camelCase
-
-## 3.3 Referencing Credential Types
-
-Credentials referenced in the [Summary Items property](#22-summary-items) should correspond to credential types, not
-hyphenated strings, e.g.`DismantlerCredential` instead of `cx-dismantler`. Note that actual types will not be used as
-that would require term definitions in the VC context.
-
-The proposed valid property values are:
-
 - MembershipCredentialCX
 - DismantlerCredential
 - PcfCredential
@@ -102,16 +65,10 @@ The proposed valid property values are:
 - BehaviorTwinCredential
 - BpnCredential
 
-## 3.4 Use of IRIs
+## 2.3 Mandatory Properties
 
-The `credentialSubject#contract-template` property should be an IRI instead of text. There it should be defined as
-type `@id`:
+If mandatory properties are not present, the VC should be interpreted as invalid.
 
-```json
-{
-  "contractTemplate": {
-    "@id": "summary:contractTemplate",
-    "@type": "@id"
-  }
-}
-```
+# 3. Issues
+
+Context place must be defined for the Summary Credential
