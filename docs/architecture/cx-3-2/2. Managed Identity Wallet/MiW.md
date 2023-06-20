@@ -62,7 +62,7 @@ Here is an example of a Summary VC in JSON-LD format:
       "BehaviorTwinCredential",
       "BpnCredential"
     ],
-    "contracTemplates": "https://public.catena-x.org/contracts/"
+    "contractTemplates": "https://public.catena-x.org/contracts/"
   }
 }
 ```
@@ -92,7 +92,7 @@ The Summary VC schema is based on the JSON-LD format and consists of the followi
 
 - items (array of strings): Lists the types of individual Catena-X VCs included in the summary. Each item is represented by a string value corresponding to the type of the VC.
 
-- contracTemplates (string): Indicates the URL pointing to the contract templates associated with the Summary VC.
+- contractTemplates (string): Indicates the URL pointing to the contract templates associated with the Summary VC.
 
 Conclusion
 The Summary VC schema defines a structure for consolidating multiple Catena-X VCs into a concise format suitable for transmission within HTTP headers. It allows for efficient processing and sharing of credentials while adhering to the limitations imposed by header size restrictions. The example provided demonstrates the key properties and their roles within the schema.
