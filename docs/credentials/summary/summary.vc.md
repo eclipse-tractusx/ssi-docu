@@ -21,6 +21,10 @@ The following is an example Summary VC:
   "credentialSubject": {
     "id": "<did:web:subject>",
     "holderIdentifier": "<BPN>",
+<<<<<<< HEAD
+=======
+    "type": "SummaryCredential",
+>>>>>>> ce57a8d (Change Summary VC + CX VCs; correct technical debt list)
     "items": [
       "MembershipCredential",
       "DismantlerCredential",
@@ -55,7 +59,48 @@ set of string identifiers indicating the credential types held by the subject.
 
 Valid items are:
 
+<<<<<<< HEAD
 - MembershipCredential
+=======
+- cx-active-member
+- cx-dismantler
+- cx-pcf
+- cx-sustainability
+- cx-quality
+- cx-traceability
+- cx-behavior-twin
+- cx-bpn
+
+## 2.3 Mandatory Properties
+
+If mandatory properties are not present, the VC should be interpreted as invalid.
+
+# 3. Issues
+
+The following are outstanding questions and issues that need to be resolved. There is
+a [proposed context](./summary.vc.context.modified.v1.json) that resolves these issues.
+
+## 3.1. Clear Properties
+
+- What are `credentialSubject#type` and `credentialSubject#name` used for?
+
+## 3.2 Consistent Naming
+
+- The `credentialSubject#items` property is too ambiguous and should be something
+  like `credentialSubject#hasCredentials`
+- The `credentialSubject#contract-template` property uses hyphens and should be consistent with W3C camelCase
+- The `credentialSubject#items-template` property uses hyphens and should be consistent with W3C camelCase
+
+## 3.3 Referencing Credential Types
+
+Credentials referenced in the [Summary Items property](#22-summary-items) should correspond to credential types, not
+hyphenated strings, e.g.`DismantlerCredential` instead of `cx-dismantler`. Note that actual types will not be used as
+that would require term definitions in the VC context.
+
+The proposed valid property values are:
+
+- MembershipCredentialCX
+>>>>>>> ce57a8d (Change Summary VC + CX VCs; correct technical debt list)
 - DismantlerCredential
 - PcfCredential
 - SustainabilityCredential
