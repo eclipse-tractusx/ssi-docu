@@ -7,11 +7,11 @@ Partial implementations, such as services that can only create VerifiablePresent
 ## Definition of terms
 
 - **Test case**: is the description of test data, pre-conditions, defined execution procedure, post-conditions and an expected result. Typically represented by - but not limited to - the JUnit `@Test` method annotation.
-- **Test suite**: is a set of multiple tests that are executed together and that have a contextual coherence
-- **Test subject**: in this document, "test subject" refers to one particular Issuer or Verifier implementation (or combination thereof). For example a wallet implementation of Company ABC that is capable of issuing and verifying VPs.
-- **Verifier**: is an entity that is capable of asserting that VerifiableCredentials and VerifiablePresentations have not been altered (= integrity) and that they were indeed signed by a specific party (= provenance). A verifier does **not** implicitly guarantee trust.
+- **Test suite**: is a set of multiple test cases that are executed together and that have a contextual coherence
+- **Test subject**: in this document, "test subject" refers to one particular Issuer or Verifier implementation (or combination thereof). For example a wallet implementation of Company ABC that is capable of issuing VCs would be one test subject. For the purposes of this document, the term "client code" is used somewhat synonymously, referring to the actual implementation code in the test subject.
+- **Verifier**: is an entity that is capable of asserting that VerifiableCredentials and VerifiablePresentations have not been altered (= integrity) and that they were indeed signed by a specific party (= provenance). A Verifier does **not** implicitly establish or check trust.
 - **Issuer**: is an entity that can create VerifiableCredentials (=a set of claims) and compute a mathematical proof for them in such a way that every Verifier is able to perform the corresponding verification. If an Issuer is only capable of generating VPs from existing VCs, but cannot issue VCs, we refer to it as _Presentation Issuer_.
-- **Presentation Issuer**: this is an Issuer entity that can only create VPs out of existing VCs, but cannot issue VCs. This may be due to a legal or business limitation, for example because only Government bodies may issue VCs, etc.
+- **Presentation Issuer**: this is an Issuer entity that can only create VPs out of existing VCs, but cannot issue VCs. This may be due to any number of legal or business limitations, for example because only Government bodies may issue VCs, etc.
 - **Trust**: for the purposes of this document, trust is not particularly relevant, because it exists intrinsically, not by any mathematical means. In other words, as long as the provenance of a signature or a token can be traced to one particular entity, and that entity is inherently trusted, the token is implicitly trusted. 
 - **Crypto suite**: a collection of cryptographic primitives that are used to create and verify VerifiableCredentials and VerifiablePresentations. A list of currently known suites is posted [here](https://w3c-ccg.github.io/ld-cryptosuite-registry/). Every Issuer and Verifier must publish the crypto suite(s) it supports.
 - **Compliance**: is established once all relevant test cases have been passed. Test reports SHOULD be provided in an [automated way](#automatic-certificate-of-compliance). All tests MUST be executed for each crypto suite, that is supported by a particular issuer or verifier. For example, if an issuer only supports `RsaSignature2018` and `Ed25519`, it must perform all test using each of these crypto suites.
@@ -20,7 +20,9 @@ Partial implementations, such as services that can only create VerifiablePresent
 ## Test specification
 This section defines all relevant test that test subjects must successfully complete in order to receive compliance approval. Note that all tests are to be numbered sequentially starting at `v-t_0001` and `i-t_0001` for verifier and issuer tests, respectively. In addition, all tests SHOULD provide a textual description, e.g. using `@DisplayName` in JUnit 5.
 
-### Test cases for verifiers
+> Unless explicitly stated otherwise, all JSON-LD documents can be presented in expanded or in compacted form.
+
+### Test suite for verifiers
 
 - verify a valid VC with linked proof
 - verify a valid VC with embedded proof
@@ -35,7 +37,7 @@ This section defines all relevant test that test subjects must successfully comp
 - detect a forged VP proof (over one single valid VC)
 - detect a valid VP containing an invalid VC: the VP is valid, but was generated over `[1, 2, N]` invalid VCs
 
-### Test cases for issuers
+### Test suite for issuers
 
 - Sign a credential with `[0, 1, N]` claims
 - Sign a compacted credential with `[0, 1, N]` claims
@@ -50,7 +52,7 @@ The following section outlines two recommended ways for test subjects (or "clien
 
 ### 1. Embedding in client code
 
-For JVM-language-based implementations, the [Eclipse Dataspace TCK project](https://github.com/eclipse-dataspacetck) provides an SPI to which test subjects can delegate test execution. Practically, implementors simply inherit a test base class that contains all test code and that only delegates back to client code for business logic invocations. 
+For implementations that are based on a JVM-language, the [Eclipse Dataspace TCK project](https://github.com/eclipse-dataspacetck) provides an SPI to which test subjects can delegate test execution. Practically, implementors simply inherit a test base class that contains all test code and that only delegates back to client code for business logic invocations. 
 
 Throwing an `UnsupportedOperationException` in client code marks the test as "disabled".
 
@@ -71,8 +73,8 @@ This approach provides two major advantages:
 - portability: running TCK compliance tests could be done in CI, or even as a `helm test`
 - the TCK MAY record test runs in its system-of-records for future reference
 
-### 3. Test-by-contract
+### 3. [Not recommended] Test-by-contract
 
-If the preceding ways cannot be used for some reason, it is theoretically possible to download the TCKs test vectors (= JSON-LD files) and to implement all tests directly in the test subject's code base. 
+If neither of the previous approaches cannot be used for some reason, it is theoretically possible to download the TCKs test vectors (= JSON-LD files) and to implement all tests directly in the test subject's code base. 
 
-> This approach is **not recommended**, because it requires updaing the test vectors frequently, and it requires an additional in-depth review of the test implementation.
+However, this approach is **not recommended**, because it would requires updating the test vectors frequently to guard against stale test data, and it would require an additional in-depth review of the test implementation. Certification may be limited if this approach is used.
