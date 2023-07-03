@@ -22,6 +22,8 @@ This section defines all relevant test that test subjects must successfully comp
 
 - verify a valid VC with linked proof
 - verify a valid VC with embedded proof
+- detect a forged VC with linked proof
+- detect a forged VC with embedded proof
 - verify canonicalization by altering the sequence of the JSON-LD
 - detect a forged credential subject, issuer, issuance date (document hash)
 - detect a tampered proof object, e.g. by adding a random property (proof hash)
