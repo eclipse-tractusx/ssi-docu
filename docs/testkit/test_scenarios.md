@@ -6,13 +6,13 @@ Partial implementations, such as services that can only create VerifiablePresent
 
 ## Definition of terms
 
-- Test case: is the description of test data, pre-conditions, defined execution procedure, post-conditions and an expected result. Typically represented by - but not limited to - the JUnit `@Test` method annotation.
-- Test suite: is a set of multiple tests that are executed together and that have a contextual coherence
-- Verifier: is an entity that is capable of asserting that VerifiableCredentials and VerifiablePresentations have not been altered (= integrity) and that they were indeed signed by a specific party (= provenance). A verifier does **not** implicitly guarantee trust.
-- Issuer: is an entity that can create VerifiableCredentials (=a set of claims) and compute a mathematical proof for them in such a way that every Verifier is able to perform the corresponding verfication.
-- Trust: for the purposes of this document, trust is not relevant, because it exists intrinsically. 
-- Crypto suite: a collection of cryptographic primitives. A list of currently known suites is posted [here](https://w3c-ccg.github.io/ld-cryptosuite-registry/).
-- Compliance: is established once all relevant tests have been passed and SHOULD be provided in an [automated way](#automatic-certificate-of-compliance). All tests should be executed for every crypto suite, that is supported by a particular issuer or verifier. For example, if an issuer only supports `RsaSignature2018` and `Ed25519`, it must perform all test using those crypto suites, one test run per suite.
+- **Test case**: is the description of test data, pre-conditions, defined execution procedure, post-conditions and an expected result. Typically represented by - but not limited to - the JUnit `@Test` method annotation.
+- **Test suite**: is a set of multiple tests that are executed together and that have a contextual coherence
+- **Verifier**: is an entity that is capable of asserting that VerifiableCredentials and VerifiablePresentations have not been altered (= integrity) and that they were indeed signed by a specific party (= provenance). A verifier does **not** implicitly guarantee trust.
+- **Issuer**: is an entity that can create VerifiableCredentials (=a set of claims) and compute a mathematical proof for them in such a way that every Verifier is able to perform the corresponding verification. 
+- **Trust**: for the purposes of this document, trust is not relevant, because it exists intrinsically. That means, as long as the provenance of a signature of a token can be traced to one particular entity, and that entity is inherently trusted, the token is implicitly trusted. 
+- **Crypto suite**: a collection of cryptographic primitives that are used to create and verify VerifiableCredentials and VerifiablePresentations. A list of currently known suites is posted [here](https://w3c-ccg.github.io/ld-cryptosuite-registry/). Every Issuer and Verifier must publish the crypto suite(s) it supports.
+- **Compliance**: is established once all relevant test cases have been passed. Test reports SHOULD be provided in an [automated way](#automatic-certificate-of-compliance). All tests MUST be executed for each crypto suite, that is supported by a particular issuer or verifier. For example, if an issuer only supports `RsaSignature2018` and `Ed25519`, it must perform all test using each of these crypto suites.
 
 
 ## Test specification
