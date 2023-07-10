@@ -2,7 +2,7 @@
   "@context": {
     "@version": 1.1,
     "@protected": true,
-    "summary": "https://w3id.org/2023/catenax/credentials/summary/",
+    "summary": "https://w3id.org/2023/tractusx/credentials/summary/",
     "id": "@id",
     "type": "@type",
     "SummaryCredential": {
@@ -14,13 +14,13 @@
     "holderIdentifier": {
       "@id": "summary:holderIdentifier"
     },
-    "items": {
-      "@id": "summary:items",
+    "hasCredentials": {
+      "@id": "summary:hasCredentials",
       "@type": "https://schema.org/Text"
     },
     "contractTemplate": {
-      "@id": "summary:contract-template",
-      "@type": "https://schema.org/Text"
+      "@id": "summary:contractTemplate",
+      "@type": "@id"
     }
   }
 }

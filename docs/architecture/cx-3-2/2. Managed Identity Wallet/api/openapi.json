@@ -1,0 +1,3106 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Managed Identity Wallets API",
+        "version": "0.0.1",
+        "description": "Managed Identity Wallets API",
+        "termsOfService": "https://www.eclipse.org/legal/termsofuse.php",
+        "contact": {
+            "name": "Eclipse Tractus-X",
+            "url": "https://projects.eclipse.org/projects/automotive.tractusx",
+            "email": "tractusx-dev@eclipse.org"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://github.com/eclipse-tractusx/managed-identity-wallets/blob/develop/LICENSE"
+        }
+    },
+    "servers": [],
+    "paths": {
+        "/api/wallets": {
+            "get": {
+                "tags": [
+                    "Wallet Endpoints"
+                ],
+                "summary": "List of wallets",
+                "description": "Permission: **view_wallets**\n\nRetrieve list of registered wallets",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "List of wallets",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/WalletDto"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/wallet": {
+            "post": {
+                "tags": [
+                    "Wallet Endpoints"
+                ],
+                "summary": "Create wallet",
+                "description": "Permission: **add_wallets**\n\nCreate a wallet and store it ",
+                "parameters": [],
+                "requestBody": {
+                    "description": "wallet to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WalletCreateDto"
+                            },
+                            "examples": {
+                                "demo": {
+                                    "value": {
+                                        "bpn": "name",
+                                        "name": "bpn"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Wallet was successfully created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WalletDto"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "name": "name",
+                                            "bpn": "bpn",
+                                            "did": "did",
+                                            "createdAt": "2023-02-13T15:06:06.539270",
+                                            "vcs": []
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The input does not comply to the syntax requirements",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "The request could not be completed due to a conflict.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/wallet/{identifier}": {
+            "get": {
+                "tags": [
+                    "Wallet Endpoints"
+                ],
+                "summary": "Retrieve wallet by identifier",
+                "description": "Permission: **view_wallets** OR **view_wallet** (The BPN of Wallet to retrieve must equal the BPN of caller)\n\nRetrieve single wallet by identifier, with or without its credentials",
+                "parameters": [
+                    {
+                        "name": "identifier",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "deprecated": false,
+                        "examples": {
+                            "did": {
+                                "value": "did:example:0123"
+                            },
+                            "bpn": {
+                                "value": "bpn123"
+                            }
+                        }
+                    },
+                    {
+                        "name": "withCredentials",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "required": true,
+                        "deprecated": false,
+                        "examples": {
+                            "withCredentials": {
+                                "value": ["false", "true"]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The wallet",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WalletDto"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "name": "name",
+                                            "bpn": "bpn",
+                                            "did": "did",
+                                            "createdAt": "2023-02-13T15:06:06.539342",
+                                            "vcs": []
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The input does not comply to the syntax requirements",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The required entity does not exists",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/wallet/{identifier}/credentials": {
+            "post": {
+                "tags": [
+                    "Wallet Endpoints"
+                ],
+                "summary": "Store Verifiable Credential",
+                "description": "Permission: **update_wallets** OR **update_wallet** (The BPN of wallet to extract credentials from must equal BPN of caller)\n\nStore a verifiable credential in the wallet of the given identifier",
+                "parameters": [
+                    {
+                        "name": "identifier",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "deprecated": false,
+                        "examples": {
+                            "did": {
+                                "value": "did:exp:123"
+                            },
+                            "bpn": {
+                                "value": "BPN123"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The verifiable credential to be stored",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IssuedVerifiableCredentialRequestDto"
+                            },
+                            "examples": {
+                                "DismantlerCredential": {
+                                    "value": {
+                                        "id": "http://example.edu/credentials/3732",
+                                        "@context": [
+                                            "https://www.w3.org/2018/credentials/v1",
+                                            "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
+                                        ],
+                                        "issuer": "<did>",
+                                        "type": ["VerifiableCredential", "DismantlerCredential"],
+                                        "issuanceDate": "2021-06-16T18:56:59Z",
+                                        "expirationDate": "2022-06-16T18:56:59Z",
+                                        "credentialSubject": {
+                                            "id": "<did>",
+                                            "holderIdentifier": "<BPN>",
+                                            "allowedVehicleBrands": ["Alfa Romeo", "Alpina", "BMW"]    
+                                        },
+                                        "proof": {
+                                            "type": "JsonWebSignature2020",
+                                            "created": "2021-11-13T18:19:39Z",
+                                            "verificationMethod": "did:web:issuerKey",
+                                            "proofPurpose": "assertionMethod",
+                                            "proofValue": "z4YrH995RG8SbmgHG5CLYzAsKfYUSJHSujbJNBqdLKwR6AhWJ8LLAutvg4rJCjGBqvdETEc3gbgJtTBzEQGx9ATbf"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "Credential with id http://example.edu/credentials/3732has been successfully stored"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The input can not be processed due to semantic mismatches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The required entity does not exists",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/didDocuments/{identifier}": {
+            "get": {
+                "tags": [
+                    "DID-Document"
+                ],
+                "summary": "Resolve DID Document",
+                "description": "Resolve the DID document for a given DID or BPN",
+                "parameters": [
+                    {
+                        "name": "identifier",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "deprecated": false,
+                        "examples": {
+                            "did": {
+                                "value": "did:web:BPN123"
+                            },
+                            "bpn": {
+                                "value": "BPN123"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The resolved DID Document",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DidDocumentDto"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "@context": [
+                                                "https://www.w3.org/ns/did/v1",
+                                                "https://w3id.org/security/suites/ed25519-2020/v1"
+                                              ],
+                                            "id": "did:web:miwurl.com/BPN123",
+                                            "verificationMethod": [
+                                              {
+                                                "id": "did:web:miwurl.com#key-0",
+                                                "type": "JsonWebKey2020",
+                                                "controller": "https://miwurl.com/BPN123",
+                                                "publicKeyJwk": {
+                                                  "kty": "JsonWebKey2020",
+                                                  "crv": "Ed25519",
+                                                  "x": "23345436546456456457455644432325"
+                                                }
+                                              }
+                                            ]
+                                          }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The required entity does not exists",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The input does not comply to the syntax requirements",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/credentials": {
+            "get": {
+                "tags": [
+                    "VerifiableCredentials"
+                ],
+                "summary": "Query Verifiable Credentials",
+                "description": "Permission: **view_wallets** OR **view_wallet** (The BPN of holderIdentifier must equal BPN of caller)\n\nSearch verifiable credentials with filter criteria",
+                "parameters": [
+                    {
+                        "name": "holderIdentifier",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "BPN": {
+                                "value": "BPN4567"
+                            }
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "id": {
+                                "value": "Credential UUID"
+                            }
+                        }
+                    },
+                    {
+                        "name": "issuerIdentifier",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "issuer Did": {
+                                "value": "did:example:BPN0123"
+                            },
+                            "issuer BPN": {
+                                "value": "BPN0123"
+                            }
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                          "membershipCredential": {
+                            "value": ["MembershipCredential"]
+                          },
+                          "bpnCredential": {
+                            "value": ["BpnCredential"]
+                          },
+                          "summaryCredential": {
+                            "value": ["SummaryCredential"]
+                          }
+                        }
+                      }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The list of verifiable credentials matching the query, empty if no match found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/VerifiableCredentialDto"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "VerifiableCredentials"
+                ],
+                "summary": "Issue Verifiable Credential",
+                "description": "Permission: **update_wallets** OR **update_wallet** (The BPN of the issuer of the Verifiable Credential must equal BPN of caller)\n\nIssue a verifiable credential with a given issuer DID",
+                "parameters": [],
+                "requestBody": {
+                    "description": "The verifiable credential input data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VerifiableCredentialRequestDto"
+                            },
+                            "examples": {
+                                "Dismantler Credential": {
+                                    "value":{
+                                        "@context": [
+                                            "https://www.w3.org/2018/credentials/v1",
+                                            "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
+                                        ],
+                                        "type": ["VerifiableCredential", "DismantlerCredential"],
+                                        "expirationDate": "2022-06-16T18:56:59Z",
+                                        "credentialSubject": {
+                                            "id": "<did>",
+                                            "type": "DismantlerCredential",
+                                            "holderIdentifier": "<BPN>",
+                                            "allowedVehicleBrands": ["Alfa Romeo", "Alpina", "BMW"]    
+                                        }
+                                    }
+                                },
+                                "Membership Credential": {
+                                    "value": {
+                                        "@context": [
+                                            "https://www.w3.org/2018/credentials/v1",
+                                            "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
+                                        ],
+                                        "type": ["VerifiableCredential", "DismantlerCredential"],
+                                        "expirationDate": "2022-06-16T18:56:59Z",
+                                        "credentialSubject": {
+                                            "id": "<did>",
+                                            "type": "DismantlerCredential",
+                                            "holderIdentifier": "<BPN>",
+                                            "allowedVehicleBrands": ["Alfa Romeo", "Alpina", "BMW"]    
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "The created Verifiable Credential",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VerifiableCredentialDto"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "id": "UUID",
+                                            "@context": [
+                                                "https://www.w3.org/2018/credentials/v1",
+                                                "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
+                                            ],
+                                            "type": ["VerifiableCredential", "MembershipCredential"],
+                                            "issuanceDate": "2021-06-16T18:56:59Z",
+                                            "credentialSubject": {
+                                                "type":"MembershipCredential",
+                                                "holderIdentifier": "bpn",
+                                                "memberOf":"Catena-X",
+                                                "status":"Active",
+                                                "startTime":"2021-06-16T18:56:59Z"
+                                            },
+                                            "proof": {
+                                                "type": "JsonWebSignature2020",
+                                                "created": "2021-11-17T22:20:27Z",
+                                                "proofPurpose": "assertionMethod",
+                                                "verificationMethod": "did:example:76e12ec712ebc6f1c221ebfeb1f#key-1",
+                                                "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The input can not be processed due to semantic mismatches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The input does not comply to the syntax requirements",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                  "VerifiableCredentials"
+                ],
+                "summary": "Delete Verifiable Credential by ID",
+                "description": "Permission: **update_wallet**\n\nDelete a verifiable credential by its ID",
+                "parameters": [
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "description": "The ID of the Verifiable Credential to delete",
+                    "schema": {
+                      "type": "string"
+                    },
+                    "required": true,
+                    "deprecated": false
+                  }
+                ],
+                "responses": {
+                  "204": {
+                    "description": "The Verifiable Credential was successfully deleted"
+                  },
+                  "404": {
+                    "description": "The Verifiable Credential with the specified ID was not found",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/ExceptionResponse"
+                        },
+                        "examples": {
+                          "demo": {
+                            "value": {
+                              "message": "The Verifiable Credential with ID '123' was not found",
+                              "error": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "403": {
+                    "description": "The request could not be completed due to a forbidden access.",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/ExceptionResponse"
+                        },
+                        "examples": {
+                          "demo": {
+                            "value": {
+                              "message": "reason - exp. You are not the holder of the VC",
+                              "error": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "401": {
+                    "description": "The request could not be completed due to a failed authorization.",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/ExceptionResponse"
+                        },
+                        "examples": {
+                          "demo": {
+                            "value": {
+                              "message": "reason",
+                              "error": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "deprecated": false
+              }            
+        },
+        "/api/credentials/issuer": {
+            "get": {
+                "tags": [
+                    "Verifiable Credential - Issuer"
+                ],
+                "summary": "Query Verifiable Credentials by Issuer/Holder",
+                "description": "Permission: **view_wallets** OR **view_wallet** (The BPN of holderIdentifier must equal BPN of caller)\n\nSearch verifiable credentials by issuer DID, holder DID, issuer BPN, or holder BPN",
+                "parameters": [
+                    {
+                        "name": "issuerDid",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "issuer Did": {
+                                "value": "did:example:BPN0123"
+                            }
+                        }
+                    },
+                    {
+                        "name": "holderDid",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "holder Did": {
+                                "value": "did:example:BPN4567"
+                            }
+                        }
+                    },
+                    {
+                        "name": "issuerBpn",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "issuer BPN": {
+                                "value": "BPN0123"
+                            }
+                        }
+                    },
+                    {
+                        "name": "holderBpn",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "holder BPN": {
+                                "value": "BPN4567"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The list of verifiable credentials matching the query, empty if no match found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/VerifiableCredentialDto"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "Verifiable Credential - Issuer"
+                ],
+                "summary": "Issue a Verifiable Credential with base wallet issuer",
+                "description": "Permission: **update_wallets** OR **update_wallet** (The BPN of base wallet must equal BPN of caller)\n\nIssue a verifiable credential by base wallet",
+                "parameters": [         
+                    {
+                        "name": "holderDid",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "deprecated": false,
+                        "examples": {
+                            "DID": {
+                                "value": "did:web:uri:BPN4567"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The verifiable credential input",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VerifiableCredentialRequestWithoutIssuerDto"
+                            },
+                            "examples": {
+                                "demo": {
+                                    "value": {
+                                        "id": "uuid",
+                                        "@context": [
+                                            "https://www.w3.org/2018/credentials/v1",
+                                            "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
+                                        ],
+                                        "type": ["VerifiableCredential", "AnyType"],
+                                        "issuanceDate": "2021-06-16T18:56:59Z",
+                                        "credentialSubject": {
+                                            "any":"subjects"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "The created Verifiable Credential",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VerifiableCredentialDto"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "id": "did",
+                                            "@context": [
+                                                "https://www.w3.org/2018/credentials/v1",
+                                                "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
+                                            ],
+                                            "type": ["VerifiableCredential", "MembershipCredential"],
+                                            "issuanceDate": "2021-06-16T18:56:59Z",
+                                            "credentialSubject": {
+                                                "type":"MembershipCredential",
+                                                "holderIdentifier": "bpn",
+                                                "memberOf":"Catena-X",
+                                                "status":"Active",
+                                                "startTime":"2021-06-16T18:56:59Z"
+                                            },
+                                            "proof": {
+                                                "type": "JsonWebSignature2020",
+                                                "created": "2021-11-17T22:20:27Z",
+                                                "proofPurpose": "assertionMethod",
+                                                "verificationMethod": "did:example:76e12ec712ebc6f1c221ebfeb1f#key-1",
+                                                "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The input can not be processed due to semantic mismatches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The input does not comply to the syntax requirements",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/credentials/issuer/membership": {
+            "post": {
+                "tags": [
+                    "Verifiable Credential - Issuer"
+                ],
+                "summary": "Issue a Membership Verifiable Credential with base wallet issuer",
+                "description": "Permission: **update_wallets** OR **update_wallet** (The BPN of base wallet must equal BPN of caller)\n\nIssue a verifiable credential by base wallet",
+                "parameters": [],
+                "requestBody": {
+                    "description": "The bpn of the holders wallet",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateMembershipVCDto"
+                            },
+                            "examples": {
+                                "demo": {
+                                    "value": {
+                                        "bpn": "bpn"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "The created Verifiable Credential",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VerifiableCredentialDto"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "id": "UUID",
+                                            "@context": [
+                                                "https://www.w3.org/2018/credentials/v1",
+                                                "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/businessPartnerData"
+                                            ],
+                                            "type": ["VerifiableCredential", "MembershipCredential"],
+                                            "issuanceDate": "2021-06-16T18:56:59Z",
+                                            "credentialSubject": {
+                                                "type":"MembershipCredential",
+                                                "holderIdentifier": "bpn",
+                                                "memberOf":"Catena-X",
+                                                "status":"Active",
+                                                "startTime":"2021-06-16T18:56:59Z"
+                                            },
+                                            "proof": {
+                                                "type": "JsonWebSignature2020",
+                                                "created": "2021-11-17T22:20:27Z",
+                                                "proofPurpose": "assertionMethod",
+                                                "verificationMethod": "did:web:miw.de/bpn0000000000#key-0",
+                                                "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The input can not be processed due to semantic mismatches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The input does not comply to the syntax requirements",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/credentials/issuer/framework": {
+            "post": {
+                "tags": [
+                    "Verifiable Credential - Issuer"
+                ],
+                "summary": "Issue a Use Case Verifiable Credential with base wallet issuer",
+                "description": "Permission: **update_wallets** OR **update_wallet** (The BPN of base wallet must equal BPN of caller)\n\nIssue a verifiable credential by base wallet",
+                "parameters": [],
+                "requestBody": {
+                    "description": "The bpn of the holders wallet",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateMembershipVCDto"
+                            },
+                            "examples": {
+                                "Tracability": {
+                                    "value": {
+                                        "bpn": "bpn",
+                                        "type": "TraceabilityCredential",
+                                        "contractTemplate": "https://public.catena-x.org/contracts/traceabilty.v1.pdf",
+                                        "contractVersion": "1.0.0"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "The created Verifiable Credential",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VerifiableCredentialDto"
+                                },
+                                "examples": {
+                                    "Behavior Twin Use Case Credential": {
+                                        "value": {
+                                            "@context": [
+                                                "https://www.w3.org/2018/credentials/v1",
+                                                "https://www.w3.org/2018/credentials/examples/v1",
+                                                "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/UseCaseVC"
+                                            ],
+                                            "id": "https://public.catena-x.org/contracts/behavior_twin.v1.pdf",
+                                            "issuer": "<did of OpCo>",
+                                            "type": ["VerifiableCredential", "UseCaseFrameworkCondition"],
+                                            "issuanceDate": "somedate",
+                                            "credentialSubject": {
+                                                 "id": "<did>",
+                                                 "holderIdentifier": "BPN",
+                                                "usecase-agreement": {
+                                                    "type": "BehaviorTwinCredential",
+                                                    "contractTemplate": "https://public.catena-x.org/contracts/behavior_twin.v1.pdf",
+                                                    "contractVersion": "1.0.0"
+                                                }   
+                                            },
+                                            "proof": {
+                                                "type": "JsonWebSignature2020",
+                                                "created": "2021-11-13T18:19:39Z",
+                                                "verificationMethod": "did:web:myKey#key-0",
+                                                "proofPurpose": "assertionMethod",
+                                                "proofValue": "z4YrH995RG8SbmgHG5CLYzAsKfYUSJHSujbJNBqdLKwR6AhWJ8LLAutvg4rJCjGBqvdETEc3gbgJtTBzEQGx9ATbf"
+                                            }
+                                         }
+                                    },
+                                    "Trace Use Case Credential": {
+                                        "value": {
+                                            "@context": [
+                                                "https://www.w3.org/2018/credentials/v1",
+                                                "https://www.w3.org/2018/credentials/examples/v1",
+                                                "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/UseCaseVC"
+                                            ],
+                                            "id": "https://public.catena-x.org/contracts/traceabilty.v1.pdf",
+                                            "issuer": "<did of OpCo>",
+                                            "type": ["VerifiableCredential", "Use_Case_Framework_Condition"],
+                                            "holder": "BPN of holder",
+                                            "validFrom": "1684301310",
+                                            "validUntil": "1734409682",
+                                            "credentialSubject": {
+                                                  "id": "<did>",
+                                                "usecase-agreement": {
+                                                    "type": "TraceabilityCredential",
+                                                    "contract-template": "https://public.catena-x.org/contracts/traceabilty.v1.pdf",
+                                                    "contract-version": "1.0.0"
+                                                }
+                                            },
+                                            "proof": {
+                                                "type": "JsonWebSignature2020",
+                                                "created": "2021-11-13T18:19:39Z",
+                                                "verificationMethod": "did:web:myKey",
+                                                "proofPurpose": "assertionMethod",
+                                                "proofValue": "z4YrH995RG8SbmgHG5CLYzAsKfYUSJHSujbJNBqdLKwR6AhWJ8LLAutvg4rJCjGBqvdETEc3gbgJtTBzEQGx9ATbf"
+                                            }
+                                         }
+                                    },
+                                    "Quality Use Case Credential":{ 
+                                        "value": {
+                                            "@context": [
+                                                "https://www.w3.org/2018/credentials/v1",
+                                                "https://www.w3.org/2018/credentials/examples/v1",
+                                                "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/UseCaseVC"
+                                            ],
+                                            "id": "https://public.catena-x.org/contracts/quality.v1.pdf",
+                                            "issuer": "<did of OpCo>",
+                                            "type": ["VerifiableCredential", "Use_Case_Framework_Condition"],
+                                            "holder": "BPN of holder",
+                                            "validFrom": "1684301310",
+                                            "validUntil": "1734409682",
+                                            "credentialSubject": {
+                                                  "id": "<did>",
+                                                "usecase-agreement": {
+                                                    "type": "QualityCredential",
+                                                    "contract-template": "https://public.catena-x.org/contracts/quality.v1.pdf",
+                                                    "contract-version": "1.0.0"    
+                                                }
+                                            },
+                                            "proof": {
+                                                "type": "JsonWebSignature2020",
+                                                "created": "2021-11-13T18:19:39Z",
+                                                "verificationMethod": "did:web:myKey",
+                                                "proofPurpose": "assertionMethod",
+                                                "proofValue": "z4YrH995RG8SbmgHG5CLYzAsKfYUSJHSujbJNBqdLKwR6AhWJ8LLAutvg4rJCjGBqvdETEc3gbgJtTBzEQGx9ATbf"
+                                            }
+                                         }
+                                    },
+                                    "PCF Use Case Credential":{ 
+                                        "value": {
+                                            "@context": [
+                                                "https://www.w3.org/2018/credentials/v1",
+                                                "https://www.w3.org/2018/credentials/examples/v1",
+                                                "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/UseCaseVC"
+                                            ],
+                                            "id": "https://public.catena-x.org/contracts/quality.v1.pdf",
+                                            "issuer": "<did of OpCo>",
+                                            "type": ["VerifiableCredential", ""],
+                                            "holder": "BPN of holder",
+                                            "validFrom": "1684301310",
+                                            "validUntil": "1734409682",
+                                            "credentialSubject": {
+                                                  "id": "<did>",
+                                                "usecase-agreement": {
+                                                    "value": "",
+                                                    "type": "",
+                                                    "contract-template": "",
+                                                    "contract-version": "1.0.0"    
+                                                }
+                                            },
+                                            "proof": {
+                                                "type": "JsonWebSignature2020",
+                                                "created": "2021-11-13T18:19:39Z",
+                                                "verificationMethod": "did:web:myKey",
+                                                "proofPurpose": "assertionMethod",
+                                                "proofValue": "z4YrH995RG8SbmgHG5CLYzAsKfYUSJHSujbJNBqdLKwR6AhWJ8LLAutvg4rJCjGBqvdETEc3gbgJtTBzEQGx9ATbf"
+                                            }
+                                         }
+                                    },
+                                    "Access to PCR Use Case Credential":{ 
+                                        "value": {
+                                            "@context": [
+                                                "https://www.w3.org/2018/credentials/v1",
+                                                "https://www.w3.org/2018/credentials/examples/v1",
+                                                "https://raw.githubusercontent.com/catenax-ng/product-core-schemas/main/UseCaseVC"
+                                            ],
+                                            "id": "https://public.catena-x.org/contracts/quality.v1.pdf",
+                                            "issuer": "<did of OpCo>",
+                                            "type": ["VerifiableCredential", ""],
+                                            "holder": "BPN of holder",
+                                            "validFrom": "1684301310",
+                                            "validUntil": "1734409682",
+                                            "credentialSubject": {
+                                                  "id": "<did>",
+                                                "usecase-agreement": {
+                                                    "value": "",
+                                                    "type": "",
+                                                    "contract-template": "",
+                                                    "contract-version": "1.0.0"    
+                                                }
+                                            },
+                                            "proof": {
+                                                "type": "JsonWebSignature2020",
+                                                "created": "2021-11-13T18:19:39Z",
+                                                "verificationMethod": "did:web:myKey",
+                                                "proofPurpose": "assertionMethod",
+                                                "proofValue": "z4YrH995RG8SbmgHG5CLYzAsKfYUSJHSujbJNBqdLKwR6AhWJ8LLAutvg4rJCjGBqvdETEc3gbgJtTBzEQGx9ATbf"
+                                            }
+                                         }
+                                    }
+                                }
+                                
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The input can not be processed due to semantic mismatches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The input does not comply to the syntax requirements",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/credentials/issuer/dismantler": {
+            "post": {
+                "tags": [
+                    "Verifiable Credential - Issuer"
+                ],
+                "summary": "Issue a Use Case Verifiable Credential with base wallet issuer",
+                "description": "Permission: **update_wallets** OR **update_wallet** (The BPN of base wallet must equal BPN of caller)\n\nIssue a verifiable credential by base wallet",
+                "parameters": [],
+                "requestBody": {
+                    "description": "The bpn of the holders wallet",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateDismantlerVCDto"
+                            },
+                            "examples": {
+                                "Dismantler": {
+                                    "value": {
+                                        "bpn": "bpn",
+                                        "activityType": "vehicleDismantle",
+                                        "allowedVehicleBrands": ["Alfa Romeo", "Alpina", "..."]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "The created Verifiable Credential",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VerifiableCredentialDto"
+                                },
+                                "examples": {
+                                    "UseCase Agreement": {
+                                        "value": {
+                                            "id": "http://example.edu/credentials/3732",
+                                            "@context": [
+                                                "https://www.w3.org/2018/credentials/v1",
+                                                "https://www.w3.org/2018/credentials/examples/v1"
+                                            ],
+                                            "type": [
+                                                "MembershipCredential, VerifiableCredential"
+                                            ],
+                                            "issuer": "did:web:miw.de/bpn0000000000",
+                                            "issuanceDate": "2021-06-16T18:56:59Z",
+                                            "credentialSubject": {
+                                                "type":"MembershipCredential",
+                                                "memberOf": "Catena-X",
+                                                "status":"Active",
+                                                "startTime":"2021-06-16T18:56:59Z"
+                                            },
+                                            "holderIdentifier": "bpn",
+                                            "proof": {
+                                                "type": "JsonWebSignature2020",
+                                                "created": "2021-11-17T22:20:27Z",
+                                                "proofPurpose": "assertionMethod",
+                                                "verificationMethod": "did:web:miw.de/bpn0000000000#key-0",
+                                                "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                            }
+                                        }
+                                    },
+                                    "SomeOtherCredential": {
+                                        "value": {
+                                            "id": "http://example.edu/credentials/3732",
+                                            "@context": [
+                                                "https://www.w3.org/2018/credentials/v1",
+                                                "https://www.w3.org/2018/credentials/examples/v1"
+                                            ],
+                                            "type": [
+                                                "MembershipCredential, VerifiableCredential"
+                                            ],
+                                            "issuer": "did:web:miw.de/bpn0000000000",
+                                            "issuanceDate": "2021-06-16T18:56:59Z",
+                                            "credentialSubject": {
+                                                "type":"MembershipCredential",
+                                                "memberOf": "Catena-X",
+                                                "status":"Active",
+                                                "startTime":"2021-06-16T18:56:59Z"
+                                            },
+                                            "holderIdentifier": "bpn",
+                                            "proof": {
+                                                "type": "JsonWebSignature2020",
+                                                "created": "2021-11-17T22:20:27Z",
+                                                "proofPurpose": "assertionMethod",
+                                                "verificationMethod": "did:web:miw.de/bpn0000000000#key-0",
+                                                "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The input can not be processed due to semantic mismatches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The input does not comply to the syntax requirements",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/credentials/validation": {
+            "post": {
+                "tags": [
+                    "Verifiable Credential - Validation"
+                ],
+                "summary": "Validate Verifiable Credential",
+                "description": "Permission: **view_wallets** OR **view_wallet**\n\nValidate Verifiable Credentials",
+                "parameters": [
+                    {
+                        "name": "withDateValidation",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "nullable": true
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "withDateValidation": {
+                                "value": "false"
+                            }
+                        }
+                    },
+                    {
+                        "name": "withRevocationValidation",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "withRevocationValidation": {
+                                "value": "false"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The verifiable credential to validate",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VerifiableCredentialDto"
+                            },
+                            "examples": {
+                                "demo": {
+                                    "value": {
+                                        "id": "http://example.edu/credentials/3732",
+                                        "@context": [
+                                            "https://www.w3.org/2018/credentials/v1",
+                                            "https://www.w3.org/2018/credentials/examples/v1"
+                                        ],
+                                        "type": [
+                                            "University-Degree-Credential, VerifiableCredential"
+                                        ],
+                                        "issuer": "did:example:76e12ec712ebc6f1c221ebfeb1f",
+                                        "issuanceDate": "2019-06-16T18:56:59Z",
+                                        "expirationDate": "2019-06-17T18:56:59Z",
+                                        "credentialSubject": {
+                                            "college": "Test-University"
+                                        },
+                                        "proof": {
+                                            "type": "JsonWebSignature2020",
+                                            "created": "2021-11-17T22:20:27Z",
+                                            "proofPurpose": "assertionMethod",
+                                            "verificationMethod": "did:example:76e12ec712ebc6f1c221ebfeb1f#key-1",
+                                            "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The verification value",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VerifyResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "valid": true,
+                                            "vp": {
+                                                "@context": [
+                                                    "https://www.w3.org/2018/credentials/v1"
+                                                ],
+                                                "type": [
+                                                    "VerifiablePresentation"
+                                                ],
+                                                "holder": "did:example:76e12ec712ebc6f1c221ebfeb1f",
+                                                "verifiableCredential": [
+                                                    {
+                                                        "id": "http://example.edu/credentials/3732",
+                                                        "@context": [
+                                                            "https://www.w3.org/2018/credentials/v1",
+                                                            "https://www.w3.org/2018/credentials/examples/v1"
+                                                        ],
+                                                        "type": [
+                                                            "University-Degree-Credential, VerifiableCredential"
+                                                        ],
+                                                        "issuer": "did:example:76e12ec712ebc6f1c221ebfeb1f",
+                                                        "issuanceDate": "2019-06-16T18:56:59Z",
+                                                        "expirationDate": "2019-06-17T18:56:59Z",
+                                                        "credentialSubject": {
+                                                            "college": "Test-University"
+                                                        },
+                                                        "proof": {
+                                                            "type": "JsonWebSignature2020",
+                                                            "created": "2021-11-17T22:20:27Z",
+                                                            "proofPurpose": "assertionMethod",
+                                                            "verificationMethod": "did:example:76e12ec712ebc6f1c221ebfeb1f#key-1",
+                                                            "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                                        }
+                                                    }
+                                                ],
+                                                "proof": {
+                                                    "type": "JsonWebSignature2020",
+                                                    "created": "2021-11-17T22:20:27Z",
+                                                    "proofPurpose": "assertionMethod",
+                                                    "verificationMethod": "did:example:76e12ec712ebc6f1c221ebfeb1f#key-1",
+                                                    "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The input can not be processed due to semantic mismatches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The input does not comply to the syntax requirements",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/presentations": {
+            "post": {
+                "tags": [
+                    "Verifiable Presentation - Generation"
+                ],
+                "summary": "Create Verifiable Presentation",
+                "description": "Permission: **update_wallets** OR **update_wallet** (The BPN of the issuer of the Verifiable Presentation must equal to BPN of caller)\n\nCreate a verifiable presentation from a list of verifiable credentials, signed by the holder",
+                "parameters": [
+                    {
+                        "name": "withAudience",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "audiences": {
+                                "value": ["audience1", "audience2"]
+                            }
+                        }
+                    },
+                    {
+                        "name": "asJwt",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "asJwt": {
+                                "value": "false"
+                            }
+                        }
+                    },
+                    {
+                        "name": "withCredentialsDateValidation",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "withCredentialsDateValidation": {
+                                "value": "false"
+                            }
+                        }
+                    },
+                    {
+                        "name": "withCredentialsValidation",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "withCredentialsValidation": {
+                                "value": "false"
+                            }
+                        }
+                    },
+                    {
+                        "name": "withRevocationValidation",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "withRevocationValidation": {
+                                "value": "false"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The verifiable presentation input data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VerifiablePresentationRequestDto"
+                            },
+                            "examples": {
+                                "demo": {
+                                    "value": {
+                                        "holderIdentifier": "did:example:76e12ec712ebc6f1c221ebfeb1f",
+                                        "verifiableCredentials": [
+                                            {
+                                                "id": "http://example.edu/credentials/333",
+                                                "@context": [
+                                                    "https://www.w3.org/2018/credentials/v1",
+                                                    "https://www.w3.org/2018/credentials/examples/v1"
+                                                ],
+                                                "type": [
+                                                    "University-Degree-Credential, VerifiableCredential"
+                                                ],
+                                                "issuer": "did:example:76e12ec712ebc6f1c221ebfeb1f",
+                                                "issuanceDate": "2019-06-16T18:56:59Z",
+                                                "expirationDate": "2019-06-17T18:56:59Z",
+                                                "credentialSubject": {
+                                                    "college": "Test-University"
+                                                },
+                                                "proof": {
+                                                    "type": "JsonWebSignature2020",
+                                                    "created": "2021-11-17T22:20:27Z",
+                                                    "proofPurpose": "assertionMethod",
+                                                    "verificationMethod": "did:example:76e12ec712ebc6f1c221ebfeb1f#keys-1",
+                                                    "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "The created verifiable presentation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VerifiablePresentationDto"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "@context": [
+                                                "https://www.w3.org/2018/credentials/v1"
+                                            ],
+                                            "type": [
+                                                "VerifiablePresentation"
+                                            ],
+                                            "holder": "did:example:76e12ec712ebc6f1c221ebfeb1f",
+                                            "verifiableCredential": [
+                                                {
+                                                    "id": "http://example.edu/credentials/3732",
+                                                    "@context": [
+                                                        "https://www.w3.org/2018/credentials/v1",
+                                                        "https://www.w3.org/2018/credentials/examples/v1"
+                                                    ],
+                                                    "type": [
+                                                        "University-Degree-Credential, VerifiableCredential"
+                                                    ],
+                                                    "issuer": "did:example:76e12ec712ebc6f1c221ebfeb1f",
+                                                    "issuanceDate": "2019-06-16T18:56:59Z",
+                                                    "expirationDate": "2019-06-17T18:56:59Z",
+                                                    "credentialSubject": {
+                                                        "college": "Test-University"
+                                                    },
+                                                    "proof": {
+                                                        "type": "JsonWebSignature2020",
+                                                        "created": "2021-11-17T22:20:27Z",
+                                                        "proofPurpose": "assertionMethod",
+                                                        "verificationMethod": "did:example:76e12ec712ebc6f1c221ebfeb1f#key-1",
+                                                        "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                                    }
+                                                }
+                                            ],
+                                            "proof": {
+                                                "type": "JsonWebSignature2020",
+                                                "created": "2021-11-17T22:20:27Z",
+                                                "proofPurpose": "assertionMethod",
+                                                "verificationMethod": "did:example:76e12ec712ebc6f1c221ebfeb1f#key-1",
+                                                "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The input can not be processed due to semantic mismatches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/api/presentations/validation": {
+            "post": {
+                "tags": [
+                    "Verifiable Presentation - Validation"
+                ],
+                "summary": "Validate Verifiable Presentation",
+                "description": "Permission: **view_wallets** OR **view_wallet**\n\nValidate Verifiable Presentation with all included credentials",
+                "parameters": [
+                    {
+                        "name": "withDateValidation",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "nullable": true
+                        },
+                        "required": false,
+                        "deprecated": false,
+                        "examples": {
+                            "withDateValidation": {
+                                "value": "false"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The verifiable presentation to validate",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VerifiablePresentationDto"
+                            },
+                            "examples": {
+                                "demo": {
+                                    "value": {
+                                        "@context": [
+                                            "https://www.w3.org/2018/credentials/v1"
+                                        ],
+                                        "type": [
+                                            "VerifiablePresentation"
+                                        ],
+                                        "holder": "did:example:76e12ec712ebc6f1c221ebfeb1f",
+                                        "verifiableCredential": [
+                                            {
+                                                "id": "http://example.edu/credentials/3732",
+                                                "@context": [
+                                                    "https://www.w3.org/2018/credentials/v1",
+                                                    "https://www.w3.org/2018/credentials/examples/v1"
+                                                ],
+                                                "type": [
+                                                    "University-Degree-Credential, VerifiableCredential"
+                                                ],
+                                                "issuer": "did:example:76e12ec712ebc6f1c221ebfeb1f",
+                                                "issuanceDate": "2019-06-16T18:56:59Z",
+                                                "expirationDate": "2019-06-17T18:56:59Z",
+                                                "credentialSubject": {
+                                                    "college": "Test-University"
+                                                },
+                                                "proof": {
+                                                    "type": "JsonWebSignature2020",
+                                                    "created": "2021-11-17T22:20:27Z",
+                                                    "proofPurpose": "assertionMethod",
+                                                    "verificationMethod": "did:example:76e12ec712ebc6f1c221ebfeb1f#key-1",
+                                                    "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                                }
+                                            }
+                                        ],
+                                        "proof": {
+                                            "type": "JsonWebSignature2020",
+                                            "created": "2021-11-17T22:20:27Z",
+                                            "proofPurpose": "assertionMethod",
+                                            "verificationMethod": "did:example:76e12ec712ebc6f1c221ebfeb1f#key-1",
+                                            "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "The verification value",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VerifyResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "valid": true,
+                                            "vp": {
+                                                "@context": [
+                                                    "https://www.w3.org/2018/credentials/v1"
+                                                ],
+                                                "type": [
+                                                    "VerifiablePresentation"
+                                                ],
+                                                "holder": "did:example:76e12ec712ebc6f1c221ebfeb1f",
+                                                "verifiableCredential": [
+                                                    {
+                                                        "id": "http://example.edu/credentials/3732",
+                                                        "@context": [
+                                                            "https://www.w3.org/2018/credentials/v1",
+                                                            "https://www.w3.org/2018/credentials/examples/v1"
+                                                        ],
+                                                        "type": [
+                                                            "University-Degree-Credential, VerifiableCredential"
+                                                        ],
+                                                        "issuer": "did:example:76e12ec712ebc6f1c221ebfeb1f",
+                                                        "issuanceDate": "2019-06-16T18:56:59Z",
+                                                        "expirationDate": "2019-06-17T18:56:59Z",
+                                                        "credentialSubject": {
+                                                            "college": "Test-University"
+                                                        },
+                                                        "proof": {
+                                                            "type": "JsonWebSignature2020",
+                                                            "created": "2021-11-17T22:20:27Z",
+                                                            "proofPurpose": "assertionMethod",
+                                                            "verificationMethod": "did:example:76e12ec712ebc6f1c221ebfeb1f#key-1",
+                                                            "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                                        }
+                                                    }
+                                                ],
+                                                "proof": {
+                                                    "type": "JsonWebSignature2020",
+                                                    "created": "2021-11-17T22:20:27Z",
+                                                    "proofPurpose": "assertionMethod",
+                                                    "verificationMethod": "did:example:76e12ec712ebc6f1c221ebfeb1f#key-1",
+                                                    "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..JNerzfrK46Mq4XxYZEnY9xOK80xsEaWCLAHuZsFie1-NTJD17wWWENn_DAlA_OwxGF5dhxUJ05P6Dm8lcmF5Cg"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The input can not be processed due to semantic mismatches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The input does not comply to the syntax requirements",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The request could not be completed due to a forbidden access.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The request could not be completed due to a failed authorization.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExceptionResponse"
+                                },
+                                "examples": {
+                                    "demo": {
+                                        "value": {
+                                            "message": "reason",
+                                            "error": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "WalletDto": {
+                "properties": {
+                    "bpn": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "$ref": "#/components/schemas/LocalDateTime"
+                    },
+                    "did": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "vcs": {
+                        "items": {
+                            "$ref": "#/components/schemas/VerifiableCredentialDto"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "name",
+                    "bpn",
+                    "did",
+                    "createdAt",
+                    "vcs"
+                ],
+                "type": "object"
+            },
+            "VerifiableCredentialDto": {
+                "properties": {
+                    "@context": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "credentialSubject": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/Any"
+                        },
+                        "type": "object"
+                    },
+                    "expirationDate": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "issuanceDate": {
+                        "type": "string"
+                    },
+                    "issuer": {
+                        "type": "string"
+                    },
+                    "proof": {
+                        "$ref": "#/components/schemas/LdProofDto"
+                    },
+                    "type": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "@context",
+                    "type",
+                    "issuer",
+                    "issuanceDate",
+                    "credentialSubject"
+                ],
+                "type": "object"
+            },
+            "LdProofDto": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "JsonWebSignature2020"
+                    },
+                    "created": {
+                        "type": "string",
+                        "example": "2019-12-11T03:50:55Z"
+                    },
+                    "proofValue": {
+                        "type": "string",
+                        "example": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..MJ5GwWRMsadCyLNXU_flgJtsS32584MydBxBuygps_cM0sbU3abTEOMyUvmLNcKOwOBE1MfDoB1_YY425W3sAg",
+                        "nullable": true
+                    },
+                    "proofPurpose": {
+                        "type": "string",
+                        "example": "assertionMethod",
+                        "nullable": true
+                    },
+                    "verificationMethod": {
+                        "type": "string",
+                        "example": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"
+                    }
+                },
+                "required": ["type", "created", "verificationMethod"],
+                "example": {
+                    "type": "JsonWebSignature2020",
+                    "created": "2019-12-11T03:50:55Z",
+                    "proofValue": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..MJ5GwWRMsadCyLNXU_flgJtsS32584MydBxBuygps_cM0sbU3abTEOMyUvmLNcKOwOBE1MfDoB1_YY425W3sAg",
+                    "proofPurpose": "assertionMethod",
+                    "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"
+                }
+            },
+            "ExceptionResponse": {
+                "properties": {
+                    "error": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "message"
+                ],
+                "type": "object"
+            },
+            "WalletCreateDto": {
+                "properties": {
+                    "bpn": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "bpn",
+                    "name"
+                ],
+                "type": "object"
+            },
+            "CreateMembershipVCDto": {
+                "properties": {
+                    "bpn": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "bpn"
+                ],
+                "type": "object"
+            },
+            "CreateDismantlerVCDto": {
+                "properties": {
+                    "bpn": {
+                        "type": "string"
+                    },
+                    "allowedVehicleBrands": {
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "bpn",
+                    "activityType",
+                    "allowedVehicleBrands",
+                    "validWorkingArea",
+                    "validWorkingCountry"
+                ],
+                "type": "object"
+            },
+            "SuccessResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "message"
+                ],
+                "type": "object"
+            },
+            "IssuedVerifiableCredentialRequestDto": {
+                "properties": {
+                    "@context": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "CredentialStatus": {
+                    },
+                    "credentialSubject": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/Any"
+                        },
+                        "type": "object"
+                    },
+                    "expirationDate": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "issuanceDate": {
+                        "type": "string"
+                    },
+                    "issuer": {
+                        "type": "string"
+                    },
+                    "proof": {
+                        "$ref": "#/components/schemas/LdProofDto"
+                    },
+                    "type": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "@context",
+                    "type",
+                    "issuer",
+                    "issuanceDate",
+                    "credentialSubject",
+                    "proof"
+                ],
+                "type": "object"
+            },
+            "DidDocumentDto": {
+                "properties": {
+                    "alsoKnownAs": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "assertionMethodVerificationMethods": {
+                        "items": {
+                            "$ref": "#/components/schemas/Any"
+                        },
+                        "type": "array"
+                    },
+                    "authenticationVerificationMethods": {
+                        "items": {
+                            "$ref": "#/components/schemas/Any"
+                        },
+                        "type": "array"
+                    },
+                    "capabilityDelegationVerificationMethods": {
+                        "items": {
+                            "$ref": "#/components/schemas/Any"
+                        },
+                        "type": "array"
+                    },
+                    "capabilityInvocationVerificationMethods": {
+                        "items": {
+                            "$ref": "#/components/schemas/Any"
+                        },
+                        "type": "array"
+                    },
+                    "context": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "controller": {
+                        "$ref": "#/components/schemas/Short"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "keyAgreementVerificationMethods": {
+                        "items": {
+                            "$ref": "#/components/schemas/Any"
+                        },
+                        "type": "array"
+                    },
+                    "services": {
+                        "items": {
+                        },
+                        "type": "array"
+                    },
+                    "verificationMethods": {
+                        "items": {
+                            "$ref": "#/components/schemas/DidVerificationMethodDto"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "id",
+                    "context"
+                ],
+                "type": "object"
+            },
+            "DidVerificationMethodDto": {
+                "type": "object",
+                "properties": {
+                    "controller": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "publicKeyJwk": {
+                        "type": "object",
+                        "properties": {
+                            "kty": {
+                                "type": "string"
+                            },
+                            "crv": {
+                                "type": "string"
+                            },
+                            "x": {
+                                "type": "string"
+                            }
+                        },
+                        "required": ["kty", "crv", "x"],
+                        "example": {
+                            "kty": "OKP",
+                            "crv": "Ed25519",
+                            "x": "VCpo2LMLhn6iWku8MKvSLg2ZAoC-nlOyPVQaO3FxVeQ"
+                        }
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": ["JsonWebKey2020"]
+                    }
+                },
+                "required": ["id", "type", "controller"],
+                "example": {
+                    "@context": ["https://www.w3.org/ns/did/v1", "https://w3id.org/security/suites/jws-2020/v1"],
+                    "id": "did:example:123",
+                    "publicKey": [
+                        {
+                            "id": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
+                            "type": "JsonWebKey2020",
+                            "controller": "did:example:123",
+                            "publicKeyJwk": {
+                                "kty": "OKP",
+                                "crv": "Ed25519",
+                                "x": "VCpo2LMLhn6iWku8MKvSLg2ZAoC-nlOyPVQaO3FxVeQ"
+                            }
+                        }
+                    ]
+                }
+            },
+            "VerifiableCredentialRequestDto": {
+                "properties": {
+                    "@context": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "credentialSubject": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/Any"
+                        },
+                        "type": "object"
+                    },
+                    "expirationDate": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "holderIdentifier": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "isRevocable": {
+                        "type": "boolean"
+                    },
+                    "issuanceDate": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "issuerIdentifier": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "@context",
+                    "type",
+                    "issuerIdentifier",
+                    "issuanceDate",
+                    "credentialSubject"
+                ],
+                "type": "object"
+            },
+            "VerifiableCredentialRequestWithoutIssuerDto": {
+                "properties": {
+                    "@context": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "credentialSubject": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/Any"
+                        },
+                        "type": "object"
+                    },
+                    "expirationDate": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "holderIdentifier": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "isRevocable": {
+                        "type": "boolean"
+                    },
+                    "issuanceDate": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "type": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "@context",
+                    "type",
+                    "issuanceDate",
+                    "credentialSubject",
+                    "holderIdentifier"
+                ],
+                "type": "object"
+            },
+            "VerifiablePresentationRequestDto": {
+                "properties": {
+                    "holderIdentifier": {
+                        "type": "string"
+                    },
+                    "verifiableCredentials": {
+                        "items": {
+                            "$ref": "#/components/schemas/VerifiableCredentialDto"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "holderIdentifier",
+                    "verifiableCredentials"
+                ],
+                "type": "object"
+            },
+            "VerifiablePresentationDto": {
+                "properties": {
+                    "@context": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "holder": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "proof": {
+                        "$ref": "#/components/schemas/LdProofDto"
+                    },
+                    "type": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "verifiableCredential": {
+                        "items": {
+                            "$ref": "#/components/schemas/VerifiableCredentialDto"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "@context",
+                    "type"
+                ],
+                "type": "object"
+            },
+            "VerifyResponse": {
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "valid": {
+                        "type": "boolean"
+                    },
+                    "vp": {
+                        "$ref": "#/components/schemas/VerifiablePresentationDto"
+                    }
+                },
+                "required": [
+                    "valid"
+                ],
+                "type": "object"
+            },
+            "LocalDateTime": {
+                "properties": {
+                    "date": {
+                        "$ref": "#/components/schemas/LocalDate"
+                    },
+                    "time": {
+                        "$ref": "#/components/schemas/LocalTime"
+                    }
+                },
+                "type": "object"
+            },
+            "LocalDate": {
+                "properties": {
+                    "year": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "month": {
+                        "$ref": "#/components/schemas/Short"
+                    },
+                    "day": {
+                        "$ref": "#/components/schemas/Short"
+                    }
+                },
+                "type": "object"
+            },
+            "Short": {
+                "properties": {},
+                "type": "object"
+            },
+            "LocalTime": {
+                "properties": {
+                    "hour": {
+                        "$ref": "#/components/schemas/Short"
+                    },
+                    "minute": {
+                        "$ref": "#/components/schemas/Short"
+                    },
+                    "second": {
+                        "$ref": "#/components/schemas/Short"
+                    },
+                    "nano": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Byte": {
+                "properties": {},
+                "type": "object"
+            },
+            "Any": {
+                "properties": {},
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "auth-token": {
+                "bearerFormat": "JWT",
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [],
+    "tags": []
+}

@@ -8,9 +8,7 @@ autonumber
 cons -> miw++: request VC
 return VC
 cons -> miw++: send VC, generate VP
-return VP
-
-cons -> cons : create and sign JWT
+return VP (JWT format)
 
 cons -[#blue]>> prov ++: DSP request
 note left: contains JWT with\nSummaryCredential\nas VP in header

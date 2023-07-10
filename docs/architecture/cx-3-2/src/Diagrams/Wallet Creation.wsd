@@ -1,0 +1,33 @@
+@startuml
+
+participant Portal as Portal
+participant PortalIDP as PIDP 
+participant ManagedIdentiyWallet as MIW
+
+Portal -> PIDP: Get Access Token
+PIDP -> Portal : Send back Access Token
+Portal -> MIW: POST/API/Wallets(BPN, Name)
+note right: Bearer Token im Header
+MIW -> MIW: Create Database entry 
+MIW -> MIW: Create Private and Public Key
+MIW -> MIW: Store Private Key in vault
+MIW -> MIW: Create DID:web Document 
+note right: did:web:url/.wellkown/did.json (did document with Public key oder mehrere keys - muss standardisiert werden.) Hosting der DID in der Sub Domain
+MIW -> MIW: Create BPN Credential
+MIW -> MIW: Store Membership Credential in Database
+
+alt Access token invalid
+    Portal -> PIDP: Get Access Token
+    PIDP -> Portal : Send back Access Token
+    Portal -> MIW: POST/API/Wallets(BPN, Name)
+end
+
+Portal -> MIW: Create Membership Credential (BPN, Token)
+MIW-> MIW: GET Wallet by BPN 
+ MIW-> MIW: response (wallet object)
+note right: Wallet object includes did
+MIW-> MIW: Create Membershipcredential(BPN, did)
+MIW-> MIW: sign jsonLD Membership Credential with issuer private key (authrotity Private Key from Portal)
+MIW-> MIW: Create new Database entry for VC/BPN/Tenant 
+
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+title Create Wallet
+
+actor User as user
+
+participant PortalIDP as keycloak
+participant ManagedIdentityWallet as MIW
+
+box "Get Accesstoken"
+  user -> keycloak: Get AccessToken
+  keycloak --> user: AccessToken
+end box
+
+group "Create Wallet"
+    box "Create Wallet"
+        user -> MIW: "/api/wallet" with BPN and Name
+        group "Wallet Creation"  
+            MIW -> MIW: Create Database entry
+            MIW -> MIW: Create Private and Public Key
+            MIW -> MIW: Store Private Key AES encrypted in DB
+            MIW -> MIW: Create DID:web Document
+            MIW -> MIW: Store DID-Document
+        end group
+        group "BPN Credential" 
+            MIW -> MIW: Create BPN Credential
+            MIW -> MIW: Sign JSON-LD BPN Credential with issuer private key (Private Key of Issuer Wallet)
+            MIW -> MIW: Store BPN Credential
+        end group
+        group "Summary Credential" 
+            MIW -> MIW: Access User Wallet
+            MIW -> MIW: Check if Summary Credential is already Created
+            MIW -> MIW: Check BPN Credential is not already in Summary Credential
+            MIW -> MIW: Create Summary Credential with BPN
+            MIW -> MIW: Store Summary Credential in Issuer Wallet
+            MIW -> MIW: Store Summary Credential in Holder Wallet
+        end group
+        MIW --> user: Return Wallet
+    end box
+end group
+
+@enduml
