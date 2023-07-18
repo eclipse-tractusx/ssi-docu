@@ -74,7 +74,7 @@ for Verifiable Presentations (VPs) and Verifiable Credentials (VCs).
 
 ### 2.2.3 DID Service (DIDS).
 
-The DCS Creates, signs and publishes DID documents.
+The DIDS Creates, signs and publishes DID documents.
 
 ## 2.3. Issuer Service (IS)
 

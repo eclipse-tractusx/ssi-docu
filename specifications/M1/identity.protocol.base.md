@@ -52,21 +52,21 @@ be resolvable as a `Web DID`.
 
 > TODO: do we want to define the subject material of the Membership VC or should we leave it dataspace specific?
 
-# 4. Self-Issued Tokens
+# 4. Self-Issued ID Tokens
 
-A self-issued token is defined in
+A Self-iIssued ID Token is defined in
 the [Self-Issued OpenID Provider v2 specification](https://openid.net/specs/openid-connect-self-issued-v2-1_0.html#section-1.1) :
 
 > In the Self-Issued OP case, the ID Token is self-signed with a private key under the user's control, identified by the
 > sub-claim.
 
-A client may obtain a self-issued token using a variety or OAuth grant types. If the OAuth 2.0 Client Credential Grant
+A client may obtain a Self-iIssued ID Token using a variety or OAuth grant types. If the OAuth 2.0 Client Credential Grant
 type is used, the client MUST conform
 to [Section 6](#6-using-the-oauth-2-client-credential-grant-to-obtain-access-tokens-from-an-sts).
 
-# 4.1. Self-Issued Token Contents
+# 4.1. Self-iIssued ID Token Contents
 
-The self-issued token MUST adhere
+The Self-iIssued ID Token MUST adhere
 to [JSON Web Token (JWT) Profile for OAuth 2.0 Access Tokens](https://datatracker.ietf.org/doc/html/rfc9068) and MUST
 include the following claims:
 
@@ -83,12 +83,12 @@ include the following claims:
 
 ## 4.1.1. VP Access Token
 
-A Self-Issued token MAY contain an access token as an `access_token` claim that can be used by the relying party to
+A Self-iIssued ID Token MAY contain an access token as an `access_token` claim that can be used by the relying party to
 obtain additional VPs.
 
 > TODO: determine claim name
 
-# 4.2. Validating Self-Issued Tokens
+# 4.2. Validating Self-Issued ID Tokens
 
 The relying party MUST follow the steps specified in
 the [Self-Issued OpenID Provider v2 specification](https://openid.net/specs/openid-connect-self-issued-v2-1_0.html#section-11.1).
@@ -96,16 +96,16 @@ the [Self-Issued OpenID Provider v2 specification](https://openid.net/specs/open
 # 5. Verifiable Presentations
 
 Additional client metadata such as Verifiable Presentations can be obtained by a relying party (RP) using the
-client's `DID`, typically specified in the `sub` claim of a self-issued token. The DID document may contain `service`
+client's `DID`, typically specified in the `sub` claim of a Self-iIssued ID Token. The DID document may contain `service`
 entries that can be used to resolve metadata.
 
 # 6. Using the OAuth 2 Client Credential Grant to Obtain Access Tokens from an STS
 
-A self-issued token MAY be obtained by a participant agent executing
+A Self-iIssued ID Token MAY be obtained by a participant agent executing
 an [OAuth 2.0 Client Credential Grant](https://www.rfc-editor.org/rfc/rfc6749.html#section-4.4) against a Secure Token
 Service (STS) Endpoint. How the participant agent obtains the endpoint address is participant-specific and beyond the
 scope of this specification.
 
-The self-issued token request MAY contain the `bearer_access_scope` authorization request parameter which is set to a
+The Self-iIssued ID Token request MAY contain the `bearer_access_scope` authorization request parameter which is set to a
 list of space-delimited scopes the response `VP Access Token` set in the `access_token` claim will be enabled for. If
 no `bearer_access_scope` parameter is present, the `access_token` claim MUST not be included.
