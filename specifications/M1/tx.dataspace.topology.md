@@ -67,9 +67,9 @@ represent an actual deployment topology.
 The STS creates self-issued authorization tokens that contain identity claims used by participant agents under the
 control of the same participant.
 
-### 2.2.2 Verifiable Credential Service (VCS)
+### 2.2.2 Credential Service (CS)
 
-The VCS manages [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/). This includes read and write endpoints
+The CS manages [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/). This includes read and write endpoints
 for Verifiable Presentations (VPs) and Verifiable Credentials (VCs).
 
 ### 2.2.3 DID Service (DIDS).
