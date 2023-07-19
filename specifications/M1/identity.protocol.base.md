@@ -60,7 +60,7 @@ the [Self-Issued OpenID Provider v2 specification](https://openid.net/specs/open
 > In the Self-Issued OP case, the ID Token is self-signed with a private key under the user's control, identified by the
 > sub-claim.
 
-A client may obtain a Self-iIssued ID Token using a variety or OAuth grant types. If the OAuth 2.0 Client Credential Grant
+A client may obtain a Self-Issued ID Token using a variety or OAuth grant types. If the OAuth 2.0 Client Credential Grant
 type is used, the client MUST conform
 to [Section 6](#6-using-the-oauth-2-client-credential-grant-to-obtain-access-tokens-from-an-sts).
 
