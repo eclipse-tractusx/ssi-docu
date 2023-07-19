@@ -83,7 +83,7 @@ include the following claims:
 
 ## 4.1.1. VP Access Token
 
-A Self-iIssued ID Token MAY contain an access token as an `access_token` claim that can be used by the relying party to
+A Self-Issued ID Token MAY contain an access token as an `access_token` claim that can be used by the relying party to
 obtain additional VPs.
 
 > TODO: determine claim name
