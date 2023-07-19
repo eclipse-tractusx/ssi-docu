@@ -101,7 +101,7 @@ entries that can be used to resolve metadata.
 
 # 6. Using the OAuth 2 Client Credential Grant to Obtain Access Tokens from an STS
 
-A Self-iIssued ID Token MAY be obtained by a participant agent executing
+A Self-Issued ID Token MAY be obtained by a participant agent executing
 an [OAuth 2.0 Client Credential Grant](https://www.rfc-editor.org/rfc/rfc6749.html#section-4.4) against a Secure Token
 Service (STS) Endpoint. How the participant agent obtains the endpoint address is participant-specific and beyond the
 scope of this specification.
