@@ -54,7 +54,7 @@ be resolvable as a `Web DID`.
 
 # 4. Self-Issued ID Tokens
 
-A Self-iIssued ID Token is defined in
+A Self-Issued ID Token is defined in
 the [Self-Issued OpenID Provider v2 specification](https://openid.net/specs/openid-connect-self-issued-v2-1_0.html#section-1.1) :
 
 > In the Self-Issued OP case, the ID Token is self-signed with a private key under the user's control, identified by the
