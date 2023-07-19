@@ -96,7 +96,7 @@ the [Self-Issued OpenID Provider v2 specification](https://openid.net/specs/open
 # 5. Verifiable Presentations
 
 Additional client metadata such as Verifiable Presentations can be obtained by a relying party (RP) using the
-client's `DID`, typically specified in the `sub` claim of a Self-iIssued ID Token. The DID document may contain `service`
+client's `DID`, typically specified in the `sub` claim of a Self-Issued ID Token. The DID document may contain `service`
 entries that can be used to resolve metadata.
 
 # 6. Using the OAuth 2 Client Credential Grant to Obtain Access Tokens from an STS
