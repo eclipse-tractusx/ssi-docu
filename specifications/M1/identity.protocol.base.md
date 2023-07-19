@@ -106,6 +106,6 @@ an [OAuth 2.0 Client Credential Grant](https://www.rfc-editor.org/rfc/rfc6749.ht
 Service (STS) Endpoint. How the participant agent obtains the endpoint address is participant-specific and beyond the
 scope of this specification.
 
-The Self-iIssued ID Token request MAY contain the `bearer_access_scope` authorization request parameter which is set to a
+The Self-Issued ID Token request MAY contain the `bearer_access_scope` authorization request parameter which is set to a
 list of space-delimited scopes the response `VP Access Token` set in the `access_token` claim will be enabled for. If
 no `bearer_access_scope` parameter is present, the `access_token` claim MUST not be included.
