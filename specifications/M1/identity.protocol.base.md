@@ -66,7 +66,7 @@ to [Section 6](#6-using-the-oauth-2-client-credential-grant-to-obtain-access-tok
 
 # 4.1. Self-Issued ID Token Contents
 
-The Self-iIssued ID Token MUST adhere
+The Self-Issued ID Token MUST adhere
 to [JSON Web Token (JWT) Profile for OAuth 2.0 Access Tokens](https://datatracker.ietf.org/doc/html/rfc9068) and MUST
 include the following claims:
 
