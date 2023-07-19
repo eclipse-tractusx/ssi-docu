@@ -73,7 +73,7 @@ include the following claims:
 - The `iss` and `sub` claims MUST be equal and set to the bearer's (participant's) web DID.
 - The `sub_jwk` claim is not used
 - The `aud` set to the `participant_id` of the relying party (RP)
-- The `client_id` set to the `participant id` of the consumer
+- The `client_id` set to the `participant_id` of the consumer
 - The `jti` claim that is used to mitigate against replay attacks
 - All VPs in the `vp` claim MUST be in the format specified by
   the [Verifiable Credentials Data Model v1.1](https://www.w3.org/TR/vc-data-model/)
