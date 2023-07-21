@@ -35,7 +35,7 @@ issued credentials.
 
 The VPP is based on Json-Ld message types. The CS Json-Ld context is:
 
-`https://w3id.org/catenax/2023/cs/v1`
+`https://w3id.org/tractusx/2023/cs/v1`
 
 ## 1.4. The Base URL
 
