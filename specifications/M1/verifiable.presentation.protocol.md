@@ -115,7 +115,7 @@ including requiring the requester to present its own VPs.
 # 4. Resolution API
 
 If a client is not authorized for an endpoint request, the Credential Service may
-return `401 Not Authorized`, `403 Forbidden`, or `404 Not Found`.
+return `4xx Client Error`. The exact error code is implementation-specific.
 
 ## 4.1. Presentations
 
