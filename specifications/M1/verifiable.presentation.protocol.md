@@ -174,7 +174,7 @@ If successful, credentials will be created or updated and a `200 OK` returned.
 
 # 6. CS Endpoint Resolution through DID Documents
 
-Different methods may be used by a Relying Party to resolve the Credential Service for a client. One way is
+Different methods may be used by a Relying Party (as defined by the OAuth2 specification, link TBD) to resolve the Credential Service for a client. One way is
 through DID documents. If a DID document is used, the client `DID document` MUST contain at least
 one [service entry](https://www.w3.org/TR/did-core/#services) of type `CredentialService`:
 
