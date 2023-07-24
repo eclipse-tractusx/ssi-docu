@@ -74,7 +74,7 @@ Any OAuth 2.0 grant type may be used to request the access tokens.
 
 Scopes are used to specify access privileges. A scope is a string value in the form:
 
-`[alias]:[descrimiator]:[read|write|all]`
+`[alias]:[descriminator]:[read|write|all]`
 
 The `[alias]` value may be implementation-specific. The `all` value indicates both read and write access.
 
