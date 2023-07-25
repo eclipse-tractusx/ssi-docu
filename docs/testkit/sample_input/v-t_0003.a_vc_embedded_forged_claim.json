@@ -29,7 +29,7 @@
     "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFUzM4NCJ9..0ueANOomarONwEL2Y0QnCFjgOdgPjI8kL2Wk4QWh8SJjvVTR80ASVh7bi8HlQp6dUigP3r509oMQkXB6TEddi0D8oQc2Lv0uWxl7yxPInBcfIsWmQrFBTb4mCSU_MJwE"
   },
   "@context": [
-    "https://org.eclipse.tractusx/businessPartnerData",
+    "https://org.eclipse.tractusx/businessPartnerData.json",
     "https://www.w3.org/2018/credentials/v1",
     "https://w3id.org/security/suites/jws-2020/v1",
     "https://www.w3.org/ns/did/v1"

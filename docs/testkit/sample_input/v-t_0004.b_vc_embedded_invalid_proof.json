@@ -8,7 +8,7 @@
     "id": "7f6c11b4-d2b9-43c3-8411-53f6089b5d2b",
     "type": [
       "VerifiableCredential",
-      "BpnCredentialCX"
+      "BpnCredential"
     ],
     "issuer": "did:web:localhost:BPNL000000000000",
     "expirationDate": "2024-12-31T23:00:00Z",

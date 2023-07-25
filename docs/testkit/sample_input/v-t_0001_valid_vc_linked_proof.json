@@ -8,7 +8,7 @@
     "id": "https://org.eclipse.tractusx/testcases/t0001",
     "type": [
       "VerifiableCredential",
-      "BpnCredentialCX"
+      "BpnCredential"
     ],
     "issuer": "did:web:localhost:BPNL000000000000",
     "expirationDate": "2024-12-31T23:00:00Z",
