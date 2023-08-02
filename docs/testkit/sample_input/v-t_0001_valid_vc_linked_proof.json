@@ -1,7 +1,7 @@
 {
     "issuanceDate": "2023-06-12T13:13:30Z",
     "credentialSubject": {
-      "http://schema.org/identifier": "BPNL000000000000",
+      "bpn": "BPNL000000000000",
       "id": "did:web:localhost:BPNL000000000000",
       "type": "https://org.eclipse.tractusx/businessPartnerData#BpnCredential"
     },
@@ -12,7 +12,7 @@
     ],
     "issuer": "did:web:localhost:BPNL000000000000",
     "expirationDate": "2024-12-31T23:00:00Z",
-    "sec:proof": {
+    "proof": {
       "type": "JsonWebSignature2020",
       "created": "2022-12-31T23:00:00Z",
       "proofPurpose": "assertionMethod",
