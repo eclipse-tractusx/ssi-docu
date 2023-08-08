@@ -298,7 +298,7 @@ one [service entry](https://www.w3.org/TR/did-core/#services) of type `IssuerSer
 {
   "service": [
     {
-      "id":"did:example:123#identity-hub",
+      "id":"did:example:123#issuer-service",
       "type": "IssuerService", 
       "serviceEndpoint": "https://issuer.example.com"
     }
