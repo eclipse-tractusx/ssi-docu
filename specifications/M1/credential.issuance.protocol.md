@@ -266,7 +266,7 @@ the appended path `/requests/<request id>`. The issuer SHOULD implement access c
 made the request may access a particualr request status.
 
 If accepted, a Json object with a `status` property set to one of the following
-values: `RECEIVED` | `REJECTED` | `ISSUED`.
+values: `RECEIVED` | `REJECTED` | `ISSUED` will be returned.
 
 # 7. Key Rotation and Revocation
 
