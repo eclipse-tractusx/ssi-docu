@@ -115,7 +115,7 @@ the Storage API defined in the [Verifiable Presentation Protocol](./verifiable.p
 
 # 4. Credential Offer Flow
 
-Some scenarios involve the Credential Issuer making an initial offer. For example, an out-of-band may result in a
+Some scenarios involve the Credential Issuer making an initial offer. For example, an out-of-band process may result in a
 credential offer. Or, a Credential Issuer may start a key rotation process which involves sending updated credentials to
 holders signed with a new key. In this case, the issuer can proactively prompt holders to request a new credential
 during the key rotation period.
