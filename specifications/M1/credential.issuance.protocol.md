@@ -135,7 +135,9 @@ The Credential Offer `POST` body MUST be a JSON object with the following proper
 - `credential_issuer`: REQUIRED. The URL of the Credential Issuer, the `Credential Service` is requested to obtain one
   or more credentials from.
 - `credentials`: REQUIRED. A JSON array, where every entry is a JSON object or a JSON string. If the entry is an object,
-  its data MUST adhere to [the Credentials Object Parameters](#the-credentials-object-parameters). If the entry is a
+- `credentials`: REQUIRED. ...
+    - entry type object: data MUST adhere to [the Credentials Object Parameters](#the-credentials-object-parameters)
+    - entry type string: value MUST be one of the id values in one of the objects in the `credentials_supported`
   string, the string value MUST be one of the id values in one of the objects in the `credentials_supported` Credential
   Issuer metadata parameter. When processing, the `Credential Service` MUST resolve this string value to the respective
   object.
