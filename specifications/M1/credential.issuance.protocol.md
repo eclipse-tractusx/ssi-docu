@@ -271,10 +271,10 @@ values: `RECEIVED` | `REJECTED` | `ISSUED`.
 Issuer implementations SHOULD support rotation and revocation of keys used to create VC proofs. Key rotation and
 revocation may be supported in the following way:
 
-1. When a rotation is initiated, a new key pair is generated and the public key is added to a `verficationMethod` in the
-   issuer's DID document. The new private key is used to sign newly issued VC proofs.
-2. After a defined `cryptoperiod`, the old private key is decommissioned (archived or destroyed).
-   However, `verificationMethods` in the issuer's DID document are retained so existing issued VCs may be verified.
+1. After a defined `cryptoperiod`, a rotation is initiated, and a new key pair is generated and the public key is added
+   to a `verficationMethod` in the issuer's DID document. The new private key is used to sign newly issued VC proofs.
+2. The old private key is decommissioned (archived or destroyed). However, `verificationMethods` in the issuer's DID
+   document are retained so existing issued VCs may be verified.
 3. At some point before existing VCs are set to expire, an issuer may make credential offers for new VCs to holders.
 4. After a defined period, revocation will be performed where the public key's `verificationMethods` will be removed
    from the issuer's DID document. At this point, any existing VCs with proofs signed by the revoked key will not
