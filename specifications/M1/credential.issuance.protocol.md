@@ -281,7 +281,7 @@ revocation may be supported in the following way:
    verify.
 
 Implementors following this sequence should set the `expirationDate` property of issued VCs to less than
-the `cryptoperiod` of the keys used to sign their proofs.
+the rotation period of the keys used to sign their proofs.
 
 # 8. VC Revocation
 
