@@ -145,7 +145,7 @@ The Credential Offer `POST` body MUST be a JSON object with the following proper
 The `credentials` object defines the following properties:
 
 - `format`: REQUIRED. The format of the credential to be requested as defined by
-  the [[OpenID for Verifiable Credential Issuance specification](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#format_profiles).
+  the [OpenID for Verifiable Credential Issuance specification](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#format_profiles).
 - `bindingMethods`: OPTIONAL. Binding methods supported as defined by `cryptographic_binding_methods_supported` in the
   _Open ID for Verifiable Credential Issuance_ specification.
 - `cryptographicSuites`: OPTIONAL. Binding methods supported as defined by `cryptographic_suites_supported` in the
