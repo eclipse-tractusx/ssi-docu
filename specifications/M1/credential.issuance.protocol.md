@@ -125,7 +125,7 @@ during the key rotation period.
 Communication with the `Credential Offer Endpoint` MUST utilize TLS.
 
 The credential offer endpoint MUST be available under the `POST` method at `/offers` relative to the base URL of the
-holder's `Credential Service` base URL. Issuer's can obtain this URL by resolving the holder's DID and inspecting
+holder's `Credential Service` base URL. Issuers can obtain this URL by resolving the holder's DID and inspecting
 its `CredentialService` service entry.
 
 ### 4.1.1. Credential Offer Parameters
