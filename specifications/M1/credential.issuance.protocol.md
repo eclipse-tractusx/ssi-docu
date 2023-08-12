@@ -50,14 +50,14 @@ path.
 # 3. Credential Request Flow
 
 The `credential request flow` is initiated by a client making a request for one or more VCs to an
-issuer's `Credential Endpoint`. If the request is valid, the issuer endpoint will send an acknowledgement to the
+issuer's `Credential Request Endpoint`. If the request is valid, the issuer endpoint will send an acknowledgement to the
 client. If the request is approved, the VC will be issued to the client asynchronously.
 
 ## 3.1. Credential Request Endpoint
 
-Communication with the `Credential Endpoint` MUST utilize TLS.
+Communication with the `Credential Request Endpoint` MUST utilize TLS.
 
-The credential endpoint MUST be available under the `POST` method at `/credential` relative to the base URL of the
+The credential request endpoint MUST be available under the `POST` method at `/credential` relative to the base URL of the
 issuer.
 
 The request MUST include a ID Token in the HTTP `Authorization` header prefixed with `Bearer` as defined in
