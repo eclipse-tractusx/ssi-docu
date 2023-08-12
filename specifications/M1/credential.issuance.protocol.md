@@ -38,7 +38,7 @@ includes in its request to the `Credential Issuer.` If the VC request is approve
 be written to the client's `Credential Service` using the `Verifiable Presentation Protocol.` The operation is performed
 asynchronously from the client request, resulting in non-blocking behavior.
 
-## 2.1. The Base Issuer URL
+## 2.1. The Issuer Base URL
 
 All endpoint addresses are defined relative to the base URL of the issuer service. The base URL MUST use the HTTPS
 scheme. The issuer will use the base URL for the `issuer` field in all VCs it issues as defined by
