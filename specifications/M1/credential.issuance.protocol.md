@@ -313,7 +313,7 @@ one [service entry](https://www.w3.org/TR/did-core/#services) of type `IssuerSer
 }
 ```
 
-The `serviceEndpoint` URL is the base URL for the issuer service.
+The `serviceEndpoint` URL is the base URL for the Issuer Service.
 
 > TODO: Add `IssuerService` namespace
 
