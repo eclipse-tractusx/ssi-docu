@@ -61,7 +61,7 @@ The credential request endpoint MUST be available under the `POST` method at `/c
 the
 issuer.
 
-The request MUST include a ID Token in the HTTP `Authorization` header prefixed with `Bearer` as defined in
+The request MUST include an ID Token in the HTTP `Authorization` header prefixed with `Bearer` as defined in
 the [Base Identity Protocol Specification](./identity.protocol.base.md#411-vp-access-token). The `issuer` claim can be
 used by the Credential Issuer to resolve the client's DID to obtain cryptographic material for validation and credential
 binding.
