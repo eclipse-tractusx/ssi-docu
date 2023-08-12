@@ -57,7 +57,8 @@ client. If the request is approved, the VC will be issued to the client asynchro
 
 Communication with the `Credential Request Endpoint` MUST utilize TLS.
 
-The credential request endpoint MUST be available under the `POST` method at `/credential` relative to the base URL of the
+The credential request endpoint MUST be available under the `POST` method at `/credential` relative to the base URL of
+the
 issuer.
 
 The request MUST include a ID Token in the HTTP `Authorization` header prefixed with `Bearer` as defined in
@@ -103,9 +104,9 @@ Authorization: Bearer ......
 }
 ```
 
-On successful receipt of the request, the Credential Issuer MUST respond with an `201 CREATED` with the `Location`
-header set to the location of the request status in the [Credential Request Status](#credential-request-status-endpoint)
-section.
+On successful receipt of the request, the Credential Issuer MUST respond with a `201 CREATED` with the `Location`
+header set to the location of the request status. See
+the [Credential Request Status](#credential-request-status-endpoint) section.
 
 The issuer MAY respond with `401 Not Authorized` if the request is unauthorized or other `HTTP` status codes to indicate
 an exception.
@@ -115,9 +116,11 @@ the Storage API defined in the [Verifiable Presentation Protocol](./verifiable.p
 
 # 4. Credential Offer Flow
 
-Some scenarios involve the Credential Issuer making an initial offer. For example, an out-of-band process may result in a
+Some scenarios involve the Credential Issuer making an initial offer. For example, an out-of-band process may result in
+a
 credential offer. Or, a Credential Issuer may start a key rotation process which involves sending updated credentials to
-holders signed with the issuer's new key. In this case, the issuer can proactively prompt holders to request a new credential
+holders signed with the issuer's new key. In this case, the issuer can proactively prompt holders to request a new
+credential
 during the key rotation period.
 
 ## 4.1. Credential Offer Endpoint
@@ -138,9 +141,11 @@ The Credential Offer `POST` body MUST be a JSON object with the following proper
 - `credentials`: REQUIRED. ...
     - entry type object: data MUST adhere to [the Credentials Object Parameters](#the-credentials-object-parameters)
     - entry type string: value MUST be one of the id values in one of the objects in the `credentials_supported`
-  string, the string value MUST be one of the id values in one of the objects in the `credentials_supported` Credential
-  Issuer metadata parameter. When processing, the `Credential Service` MUST resolve this string value to the respective
-  object.
+      string, the string value MUST be one of the id values in one of the objects in the `credentials_supported`
+      Credential
+      Issuer metadata parameter. When processing, the `Credential Service` MUST resolve this string value to the
+      respective
+      object.
 
 #### 4.1.2. The `credentials` Object Parameters
 
