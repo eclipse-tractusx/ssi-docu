@@ -5,13 +5,13 @@
 
 autonumber
 
-box "Client Organization"
+box "Client Entity"
 participant "Client" as C
 participant "Credential Service" as CS
 participant "Secure Token Service" as STS
 end box
 
-box "Issuer Organization"
+box "Issuer Entity"
 participant "Issuer Service(s)" as IS #FFF4B3
 end box
 
