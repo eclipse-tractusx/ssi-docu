@@ -74,7 +74,7 @@ relatively simple string manipulation:
 - start with the (dataspace-specific) scope prefix (`org.eclipse.tractusx.vc.type`)
 - append a `:`
 - append the use case type
-- [optional]: append a `.` and the version identifier (e.g. `0.4.2`)
+- [optional]: append a `_` and the version identifier (e.g. `0.4.2`)
 - append a `:`
 - append the operator (`read`, `write`, `*`)
 
