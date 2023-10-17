@@ -1,0 +1,7 @@
+product: "ssi-docu"
+leadingRepository: "https://github.com/eclipse-tractusx/ssi-docu"
+repoCategory: "support"
+repositories:
+  - name: "ssi-docu"
+    usage: "This repository contains documentation about the Self-Sovereign Identity solution"
+    url: "https://github.com/eclipse-tractusx/ssi-docu"
