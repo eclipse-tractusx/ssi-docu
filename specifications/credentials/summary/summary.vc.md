@@ -36,7 +36,7 @@ The following is an example Summary VC:
 }
 ```
 
-A Json-Ld context defining Summary VC terms is [here](./summary.vc.context.v1.json)
+A Json-Ld context defining Summary VC terms is [here](summary.vc.context.v1.json)
 
 # 2. Verifiable Credential Properties
 
@@ -71,7 +71,7 @@ If mandatory properties are not present, the VC should be interpreted as invalid
 # 3. Known Issues
 
 The following are known questions and issues that need to be resolved with respect to other VCs for the 3.3 released.
-There is a [proposed context](./summary.vc.context.modified.v1.json) that resolves these issues for the summary
+There is a [proposed context](summary.vc.context.modified.v1.json) that resolves these issues for the summary
 credential if it is decided not to retire that VC. Note that these issues will not be resolved for the 3.3 release.
 
 ## 3.1 Consistent Naming
